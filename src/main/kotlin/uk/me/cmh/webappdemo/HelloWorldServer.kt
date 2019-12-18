@@ -7,5 +7,6 @@ import org.http4k.server.Jetty
 import org.http4k.server.asServer
 
 fun main() {
-    { request: Request -> Response(OK).body("Hello World!") }.asServer(Jetty(8080)).start()
+    val port :Int = System.getenv("PORT")?.toInt() ?: 8080
+    { request: Request -> Response(OK).body("Hello World!") }.asServer(Jetty(port)).start()
 }
