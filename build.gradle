@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation group: "org.http4k", name: "http4k-core", version: "3.205.0"
+    implementation group: "org.http4k", name: "http4k-server-jetty", version: "3.205.0"
 }
 
 compileKotlin {
