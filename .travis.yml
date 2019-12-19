@@ -1,5 +1,17 @@
 language: java
 jdk: openjdk8
 jobs:
+  - stage: pre-clean
+    script: ls -lrtaR build
+  - stage: clean
+    script: gradle clean
+  - stage: post-clean
+    script: ls -lrtaR build
+  - stage: jarIt
+    script: gradle shadowJar
+  - stage: post-jarIt
+    script: ls -lrtaR build
   - stage: deploy
-    script: HEROKU_API_KEY="$HEROKU_API_KEY" gradle --debug deployHeroku
+    script: HEROKU_API_KEY="$HEROKU_API_KEY" gradle deployHeroku
+  - stage: post-deploy
+    script: ls -lrtaR build
