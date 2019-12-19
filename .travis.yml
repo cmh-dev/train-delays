@@ -2,4 +2,4 @@ language: java
 jdk: openjdk8
 jobs:
   - stage: deploy
-    script: HEROKU_API_KEY="$HEROKU_API_KEY" gradle clean deployHeroku
+    script: HEROKU_API_KEY="$HEROKU_API_KEY" gradle clean shadowJar deployHeroku
