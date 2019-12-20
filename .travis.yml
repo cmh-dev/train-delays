@@ -1,4 +1,6 @@
 language: java
 jdk: openjdk8
 install: echo "skip 'gradle assemble' step"
-script: HEROKU_API_KEY="$HEROKU_API_KEY" gradle build deployHeroku
+script:
+  - gradle build
+  - HEROKU_API_KEY="$HEROKU_API_KEY" gradle deployHeroku
