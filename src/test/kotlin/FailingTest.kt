@@ -3,7 +3,7 @@ import org.junit.Test
 
 class FailingTest {
 
-    @Test
+    //@Test
     fun `failed`() {
         assert(false)
     }

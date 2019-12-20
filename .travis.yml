@@ -6,5 +6,5 @@ script:
   - gradle build
   - echo "*** CREATING ARTIFACT ***"
   - gradle shadowJar
-  - echo "*** DEPLOYING TO HEROKU ***"
+  - echo "*** DEPLOYING TO STAGING ***"
   - HEROKU_API_KEY="$HEROKU_API_KEY" gradle deployHeroku

@@ -32,7 +32,7 @@ shadowJar {
 }
 
 heroku {
-    appName = "cmh-webapp-demo"
+    appName = "cmh-webapp-demo-staging"
     processTypes(
             web: "java -jar build/libs/cmh-webapp-demo.jar"
     )
