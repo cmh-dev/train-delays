@@ -15,6 +15,9 @@ dependencies {
     implementation group: "org.http4k", name: "http4k-core", version: "3.205.0"
     implementation group: "org.http4k", name: "http4k-server-jetty", version: "3.205.0"
     testImplementation "junit:junit:4.12"
+    testImplementation "com.natpryce:hamkrest:1.7.0.0"
+    testImplementation group: "org.http4k", name: "http4k-client-apache", version: "3.205.0"
+    testImplementation group: "org.http4k", name: "http4k-client-okhttp", version: "3.205.0"
 }
 
 jar.enabled = false
@@ -23,7 +26,7 @@ shadowJar {
     archiveFileName = "cmh-webapp-demo.jar"
     mergeServiceFiles()
     manifest {
-        attributes 'Main-Class': "uk.me.cmh.webappdemo.HelloWorldServerKt"
+        attributes 'Main-Class': "uk.me.cmh.webappdemo.HelloServerKt"
     }
 }
 
