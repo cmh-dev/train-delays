@@ -1,2 +1,4 @@
-rootProject.name = 'cmh-webapp-demo'
+rootProject.name = "cmh-webapp-demo"
 
+include "webapp"
+include "webapp-smoke-test"

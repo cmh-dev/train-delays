@@ -1,0 +1,13 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+jar.enabled = false
+
+shadowJar {
+    archiveFileName = "cmh-webapp-demo.jar"
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': "uk.me.cmh.webappdemo.HelloServerKt"
+    }
+}

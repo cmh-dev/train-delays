@@ -1,3 +1,5 @@
 .gradle
 .idea
 build
+webapp/build
+webapp-smoke-test/build

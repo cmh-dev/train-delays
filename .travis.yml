@@ -2,18 +2,18 @@ language: java
 jdk: openjdk8
 jobs:
   include:
-    - stage: build_to_staging
+    - stage: build and deploy to staging
       install: echo "skip 'gradle assemble' step"
       script:
         - echo "*** BUILDING ***"
-        - gradle build
+        - ./gradlew :webapp:build
         - echo "*** CREATING ARTIFACT ***"
-        - gradle shadowJar
+        - ./gradlew :webapp:shadowJar
         - echo "*** DEPLOYING TO STAGING ***"
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
-        - heroku deploy:jar build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
-    - stage: promote_to_production
+        - heroku deploy:jar webapp/build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
+    - stage: promote to production
       install: echo "skip 'gradle assemble' step"
       script:
         - HEROKU_API_KEY="$HEROKU_API_KEY"
