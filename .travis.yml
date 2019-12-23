@@ -13,6 +13,10 @@ jobs:
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
         - heroku deploy:jar webapp/build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
+    - stage: test staging deployment
+      install: echo "skip 'gradle assemble' step"
+      script:
+        - ./gradlew :webapp-smoke-test:test
     - stage: promote to production
       install: echo "skip 'gradle assemble' step"
       script:
