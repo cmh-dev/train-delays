@@ -4,6 +4,13 @@ plugins {
 
 jar.enabled = false
 
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
+
 shadowJar {
     archiveFileName = "cmh-webapp-demo.jar"
     mergeServiceFiles()
