@@ -11,7 +11,8 @@ jobs:
         - gradle shadowJar
         - echo "*** DEPLOYING TO STAGING ***"
         - HEROKU_API_KEY="$HEROKU_API_KEY"
-        - gradle deployHeroku
+        - heroku plugins:install java
+        - heroku deploy:jar build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
     - stage: promote_to_production
       install: echo "skip 'gradle assemble' step"
       script:
