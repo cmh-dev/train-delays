@@ -10,10 +10,12 @@ import org.junit.Test
 
 class HelloWorldServerSmokeTest {
 
+    val endPoint  = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
+
     @Test
     fun `the status of the server is okay`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "https://cmh-webapp-demo-staging.herokuapp.com/status"))
+        val response  = client(Request(Method.GET, "${endPoint}/status"))
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
