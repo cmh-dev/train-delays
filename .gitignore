@@ -3,3 +3,4 @@
 build
 webapp/build
 webapp-smoke-test/build
+.DS_Store
