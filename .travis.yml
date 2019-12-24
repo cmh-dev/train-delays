@@ -1,9 +1,9 @@
 language: java
 jdk: openjdk8
+install: echo "skip 'gradle assemble' step"
 jobs:
   include:
     - stage: "build and deploy to staging"
-      install: echo "skip 'gradle assemble' step"
       script:
         - echo "*** BUILDING ***"
         - ./gradlew :webapp:build
@@ -16,17 +16,14 @@ jobs:
     - stage: "smoke test staging deployment"
       env:
         - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo-staging.herokuapp.com"
-      install: echo "skip 'gradle assemble' step"
       script:
         - ./gradlew :webapp-smoke-test:test
     - stage: "promote to production"
-      install: echo "skip 'gradle assemble' step"
       script:
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku pipelines:promote -a cmh-webapp-demo-staging
     - stage: "smoke test production deployment"
       env:
         - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo.herokuapp.com"
-      install: echo "skip 'gradle assemble' step"
       script:
         - ./gradlew :webapp-smoke-test:test
