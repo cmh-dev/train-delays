@@ -6,9 +6,9 @@ jobs:
     - stage: "build and deploy to staging"
       script:
         - echo "*** BUILDING ***"
-        - ./gradlew :webapp:build
+        - gradle :webapp:build
         - echo "*** CREATING ARTIFACT ***"
-        - ./gradlew :webapp:shadowJar
+        - gradle :webapp:shadowJar
         - echo "*** DEPLOYING TO STAGING ***"
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
@@ -17,7 +17,7 @@ jobs:
       env:
         - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo-staging.herokuapp.com"
       script:
-        - ./gradlew :webapp-smoke-test:test
+        - gradle :webapp-smoke-test:test
     - stage: "promote to production"
       script:
         - HEROKU_API_KEY="$HEROKU_API_KEY"
@@ -26,4 +26,4 @@ jobs:
       env:
         - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo.herokuapp.com"
       script:
-        - ./gradlew :webapp-smoke-test:test
+        - gradle :webapp-smoke-test:test
