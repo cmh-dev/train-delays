@@ -23,7 +23,10 @@ fun FakeServiceServerApp() :HttpHandler {
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/" bind Method.GET to {
-            Response(Status.OK).with(view of NoModelView("templates/html") ) }
+            Response(Status.OK)
+                .body(renderer.invoke(NoModelView("templates/html")))
+                .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
+         }
     )
 
 }
