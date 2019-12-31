@@ -5,12 +5,17 @@ import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
 import org.jsoup.Jsoup
 import org.junit.Test
+import java.time.Duration
 import java.time.LocalTime
 
 data class TrainService(val date: String,
                         val scheduledStart: LocalTime,
                         val scheduledEnd: LocalTime,
-                        val actualEnd: LocalTime?)
+                        val actualEnd: LocalTime?) {
+
+    fun delay() = Duration.between(scheduledEnd, actualEnd).toMinutes()
+
+}
 
 data class TrainServiceInfo(val startStation: String,
                             val endStation: String,
@@ -69,8 +74,7 @@ private fun parseTrainData(html: String): TrainServiceInfo {
             }
     }
 
-    return TrainServiceInfo(startAndEndStation.first,
-        startAndEndStation.second, trainServices)
+    return TrainServiceInfo(startAndEndStation.first, startAndEndStation.second, trainServices)
 
 }
 
@@ -80,13 +84,55 @@ class TrainDataTableParserTest {
     val html = javaClass.getResource("/test-html/recent-train-times.html").readText()
 
     @Test
-    fun `complete web page should be parsed and full service info returned`() {
-
+    fun `parsed data should contain correct start and end stations`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         assertThat(trainServiceInfo.startStation, equalTo("HSL"))
         assertThat(trainServiceInfo.endStation, equalTo("WAT"))
         assertThat(trainServiceInfo.trainServices, hasSize(equalTo(40)))
 
     }
+
+    @Test
+    fun `parsed data should contain correct number of services`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        assertThat(trainServiceInfo.trainServices, hasSize(equalTo(40)))
+    }
+
+    @Test
+    fun `parsed data should contain a correct cancelled service`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        val expectedCancelledService = trainServiceInfo.trainServices
+            .filter {
+                    trainService ->  trainService.date.equals("Fri 20")
+                    && trainService.scheduledStart.equals(LocalTime.parse("08:01"))
+            }
+            .first()
+        assertThat(expectedCancelledService.actualEnd == null, equalTo(true))
+    }
+
+    @Test
+    fun `parsed data should contain a correct run service`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        val expectedRunService = trainServiceInfo.trainServices
+            .filter {
+                    trainService ->  trainService.date.equals("Fri 20")
+                    && trainService.scheduledStart.equals(LocalTime.parse("07:13"))
+            }
+            .first()
+        assertThat(expectedRunService.actualEnd == null, equalTo(false))
+    }
+
+    @Test
+    fun `correct delay should be able to be calculate from parsed data`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        val expectedRunService = trainServiceInfo.trainServices
+            .filter {
+                    trainService ->  trainService.date.equals("Fri 20")
+                    && trainService.scheduledStart.equals(LocalTime.parse("07:13"))
+            }
+            .first()
+        assertThat(expectedRunService.delay(), equalTo(22L))
+    }
+
 
 }
