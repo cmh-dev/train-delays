@@ -18,3 +18,7 @@ shadowJar {
         attributes 'Main-Class': "uk.me.cmh.webappdemo.HelloServerKt"
     }
 }
+
+dependencies {
+    implementation 'org.jsoup:jsoup:1.12.1'
+}
