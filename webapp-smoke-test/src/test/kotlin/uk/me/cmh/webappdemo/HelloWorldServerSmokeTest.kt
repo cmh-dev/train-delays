@@ -10,7 +10,7 @@ import org.junit.Test
 
 class HelloWorldServerSmokeTest {
 
-    val endPoint  = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
+    private val endPoint  = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
 
     @Test
     fun `the status of the server is okay`() {

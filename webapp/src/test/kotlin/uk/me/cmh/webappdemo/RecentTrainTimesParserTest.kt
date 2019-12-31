@@ -8,7 +8,7 @@ import java.time.LocalTime
 
 class TrainDataTableParserTest {
 
-    val html = javaClass.getResource("/test-html/recent-train-times.html").readText()
+    private val html = javaClass.getResource("/test-html/recent-train-times.html").readText()
 
     @Test
     fun `parsed data should contain correct start and end stations`() {
@@ -28,35 +28,30 @@ class TrainDataTableParserTest {
     fun `parsed data should contain a correct cancelled service`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedCancelledService = trainServiceInfo.trainServices
-            .filter {
-                    trainService ->  trainService.date.equals("Fri 20")
-                    && trainService.scheduledStart.equals(LocalTime.parse("08:01"))
+            .first { trainService ->
+                trainService.date == "Fri 20"
+                    && trainService.scheduledStart == LocalTime.parse("08:01")
             }
-            .first()
         assertThat(expectedCancelledService.actualEnd == null, equalTo(true))
     }
 
     @Test
     fun `parsed data should contain a correct run service`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
-        val expectedRunService = trainServiceInfo.trainServices
-            .filter {
-                    trainService ->  trainService.date.equals("Fri 20")
-                    && trainService.scheduledStart.equals(LocalTime.parse("07:13"))
-            }
-            .first()
+        val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
+            trainService.date == "Fri 20"
+                    && trainService.scheduledStart == LocalTime.parse("07:13")
+        }
         assertThat(expectedRunService.actualEnd == null, equalTo(false))
     }
 
     @Test
     fun `correct delay should be able to be calculate from parsed data`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
-        val expectedRunService = trainServiceInfo.trainServices
-            .filter {
-                    trainService ->  trainService.date.equals("Fri 20")
-                    && trainService.scheduledStart.equals(LocalTime.parse("07:13"))
-            }
-            .first()
+        val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
+            trainService.date == "Fri 20"
+                    && trainService.scheduledStart == LocalTime.parse("07:13")
+        }
         assertThat(expectedRunService.delay(), equalTo(22L))
     }
 

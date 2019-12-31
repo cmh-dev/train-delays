@@ -25,7 +25,7 @@ fun FakeServiceServerApp() :HttpHandler {
         "/" bind Method.GET to {
             Response(Status.OK)
                 .body(renderer.invoke(NoModelView("templates/html")))
-                .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
+                .header("Content-Type", TEXT_HTML.toHeaderValue())
          }
     )
 
