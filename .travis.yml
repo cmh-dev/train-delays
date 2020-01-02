@@ -6,7 +6,7 @@ jobs:
     - stage: "build and deploy fake ftt server"
       script:
         - gradle :fake-recent-train-times:build
-        - gradle :webapp:shadowJar
+        - gradle :fake-recent-train-times:shadowJar
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
         - heroku deploy:jar fake-recent-train-times/build/libs/cmh-fake-rtt.jar --app cmh-fake-rtt
