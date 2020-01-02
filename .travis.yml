@@ -3,13 +3,17 @@ jdk: openjdk8
 install: echo "skip 'gradle assemble' step"
 jobs:
   include:
+    - stage: "build and deploy fake ftt server"
+      script:
+        - gradle :fake-recent-train-times:build
+        - gradle :webapp:shadowJar
+        - HEROKU_API_KEY="$HEROKU_API_KEY"
+        - heroku plugins:install java
+        - heroku deploy:jar fake-recent-train-times/build/libs/cmh-fake-rtt.jar --app cmh-fake-rtt
     - stage: "build and deploy to staging"
       script:
-        - echo "*** BUILDING ***"
         - gradle :webapp:build
-        - echo "*** CREATING ARTIFACT ***"
         - gradle :webapp:shadowJar
-        - echo "*** DEPLOYING TO STAGING ***"
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
         - heroku deploy:jar webapp/build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
