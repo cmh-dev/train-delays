@@ -16,24 +16,24 @@ data class NoModelView(val template: String) : ViewModel {
     }
 }
 
-fun FakeServiceServerApp() :HttpHandler {
+fun FakeRecentTrainTimesServerApp() :HttpHandler {
 
     val renderer = HandlebarsTemplates().CachingClasspath()
     val view = Body.viewModel(renderer, TEXT_HTML).toLens()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
-        "/" bind Method.GET to {
+        "/Home/Search" bind Method.GET to {
             Response(Status.OK)
-                .body(renderer.invoke(NoModelView("templates/html")))
+                .body(renderer.invoke(NoModelView("templates/recent-train-times")))
                 .header("Content-Type", TEXT_HTML.toHeaderValue())
          }
     )
 
 }
 
-fun FakeServiceServer(port :Int) = FakeServiceServerApp().asServer(Jetty(port))
+fun FakeRecentTrainTimesServer(port :Int) = FakeRecentTrainTimesServerApp().asServer(Jetty(port))
 
 fun main() {
     val port :Int = System.getenv("PORT")?.toInt() ?: 8080
-    FakeServiceServer(port).start()
+    FakeRecentTrainTimesServer(port).start()
 }

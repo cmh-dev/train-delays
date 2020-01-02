@@ -9,16 +9,17 @@ import org.http4k.core.Status
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import uk.me.cmh.webappdemo.FakeServiceServer
+import uk.me.cmh.webappdemo.FakeRecentTrainTimesServer
 
-class FakeServiceServerEndToEndTest {
+class FakeRecentTrainTimesServerEndToEndTest {
 
-    private val server = FakeServiceServer(8080)
+    private val server = FakeRecentTrainTimesServer(8080)
 
     @Before
     fun setUp() {
         server.start()
     }
+
 
     @After
     fun tearDown() {
@@ -34,15 +35,19 @@ class FakeServiceServerEndToEndTest {
     }
 
     @Test
-    fun `the root page should display the standard welcome page`() {
+    fun `any request to the search page will return the fake search results`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8080/"))
+        val response  = client(Request(Method.GET, "http://localhost:8080/Home/Search"))
         val contentTypeHeaderValue = response.headers
             .first { header -> header.first.toLowerCase() == "content-type" }
             .second ?: ""
         assertThat(contentTypeHeaderValue, startsWith("text/html"))
-        assertThat(response.status, equalTo(Status.OK))
-        assertThat(response.bodyString(), containsSubstring("Hello from the fake service"))
+        assertThat(response.bodyString(), containsSubstring("<title>Search - Recent Train Times</title>"))
+        assertThat(response.bodyString(), containsSubstring("<p>The table below lists all train services departing Haslemere " +
+                "(d HSL) and arriving in London Waterloo (a WAT) for the specified time " +
+                "period.  Also shown is the percentage of the time that each service arrived " +
+                "in London Waterloo no more than 5 minutes late, as well as the average " +
+                "arrival time of each service in London Waterloo.</p>"))
     }
 
 }
