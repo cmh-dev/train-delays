@@ -12,7 +12,7 @@ test {
 }
 
 shadowJar {
-    archiveFileName = "cmh-webapp-demo.jar"
+    archiveFileName = "cmh-train-delays.jar"
     mergeServiceFiles()
     manifest {
         attributes 'Main-Class': "uk.me.cmh.traindelays.TrainDelaysServerKt"

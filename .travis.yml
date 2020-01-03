@@ -16,18 +16,18 @@ jobs:
         - gradle :webapp:shadowJar
         - HEROKU_API_KEY="$HEROKU_API_KEY"
         - heroku plugins:install java
-        - heroku deploy:jar webapp/build/libs/cmh-webapp-demo.jar --app cmh-webapp-demo-staging
+        - heroku deploy:jar webapp/build/libs/cmh-train-delays.jar --app cmh-train-delays-staging
     - stage: "smoke test staging deployment"
       env:
-        - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo-staging.herokuapp.com"
+        - SMOKE_TEST_ENDPOINT="https://cmh-train-delays-staging.herokuapp.com"
       script:
         - gradle :webapp-smoke-test:test
     - stage: "promote to production"
       script:
         - HEROKU_API_KEY="$HEROKU_API_KEY"
-        - heroku pipelines:promote -a cmh-webapp-demo-staging
+        - heroku pipelines:promote -a cmh-train-delays-staging
     - stage: "smoke test production deployment"
       env:
-        - SMOKE_TEST_ENDPOINT="https://cmh-webapp-demo.herokuapp.com"
+        - SMOKE_TEST_ENDPOINT="https://cmh-train-delays.herokuapp.com"
       script:
         - gradle :webapp-smoke-test:test
