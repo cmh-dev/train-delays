@@ -9,19 +9,22 @@ import org.http4k.core.Status
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
-class HelloServerEndToEndTest {
+class TrainTimesServerEndToEndTest : TrainTimesServerBaseTest() {
 
-    private val server = HelloServer(8080)
+    private val trainTimesServer = TrainTimesServer(8080)
 
     @Before
-    fun setUp() {
-        server.start()
+    fun startTrainTimesServer() {
+        println("Starting train times server")
+        trainTimesServer.start()
     }
 
     @After
-    fun tearDown() {
-        server.stop()
+    fun stopTrainTimesServer() {
+        println("Stopping train times server")
+        trainTimesServer.stop()
     }
 
     @Test
@@ -31,5 +34,14 @@ class HelloServerEndToEndTest {
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
+
+
+    @Test
+    fun `the main page should return the correct content`() {
+        val driver = HtmlUnitDriver()
+        driver.navigate().to("http://localhost:8080/")
+        checkMainContent(driver)
+    }
+
 
 }

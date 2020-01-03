@@ -1,5 +1,3 @@
-rootProject.name = "cmh-webapp-demo"
-
 include "webapp"
 include "webapp-smoke-test"
 include "fake-recent-train-times"

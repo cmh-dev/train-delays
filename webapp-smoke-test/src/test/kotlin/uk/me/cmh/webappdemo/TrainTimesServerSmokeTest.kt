@@ -8,7 +8,7 @@ import org.http4k.core.Request
 import org.http4k.core.Status
 import org.junit.Test
 
-class HelloWorldServerSmokeTest {
+class TrainTimesServerSmokeTest {
 
     private val endPoint  = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
 
