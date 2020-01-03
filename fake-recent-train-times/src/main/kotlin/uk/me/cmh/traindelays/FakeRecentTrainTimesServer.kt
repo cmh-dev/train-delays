@@ -1,7 +1,7 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import org.http4k.core.*
-import org.http4k.core.Status.Companion.OK
+import org.http4k.core.ContentType.Companion.TEXT_HTML
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.Jetty
@@ -16,25 +16,24 @@ data class NoModelView(val template: String) : ViewModel {
     }
 }
 
-fun TrainTimesServerApp() :HttpHandler {
+fun FakeRecentTrainTimesServerApp() :HttpHandler {
 
     val renderer = HandlebarsTemplates().CachingClasspath()
+    val view = Body.viewModel(renderer, TEXT_HTML).toLens()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
-        "/" bind Method.GET to {
+        "/Home/Search" bind Method.GET to {
             Response(Status.OK)
-                .body(renderer.invoke(NoModelView("templates/main")))
-                .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
-        }
+                .body(renderer.invoke(NoModelView("templates/recent-train-times")))
+                .header("Content-Type", TEXT_HTML.toHeaderValue())
+         }
     )
 
 }
 
-fun TrainTimesServer(port :Int) = TrainTimesServerApp().asServer(Jetty(port))
+fun FakeRecentTrainTimesServer(port :Int) = FakeRecentTrainTimesServerApp().asServer(Jetty(port))
 
 fun main() {
     val port :Int = System.getenv("PORT")?.toInt() ?: 8080
-    TrainTimesServer(port).start()
+    FakeRecentTrainTimesServer(port).start()
 }
-
-

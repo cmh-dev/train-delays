@@ -1,4 +1,4 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import org.jsoup.Jsoup
 import java.time.LocalTime
@@ -48,14 +48,20 @@ fun parseTrainData(html: String): TrainServiceInfo {
                     "CANC/NR" -> null
                     else -> LocalTime.parse(actualEndTimeStr.split(" ")[0])
                 }
-                val trainService = TrainService(serviceDates[index],
+                val trainService = TrainService(
+                    serviceDates[index],
                     scheduledStartTime,
                     scheduledEndTime,
-                    actualEndTime)
+                    actualEndTime
+                )
                 trainServices.add(trainService)
             }
     }
 
-    return TrainServiceInfo(startAndEndStation.first, startAndEndStation.second, trainServices)
+    return TrainServiceInfo(
+        startAndEndStation.first,
+        startAndEndStation.second,
+        trainServices
+    )
 
 }

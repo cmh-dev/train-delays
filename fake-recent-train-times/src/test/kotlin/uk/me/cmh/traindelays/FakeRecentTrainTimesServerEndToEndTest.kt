@@ -1,3 +1,5 @@
+package uk.me.cmh.traindelays
+
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
 import com.natpryce.hamkrest.equalTo
@@ -9,7 +11,6 @@ import org.http4k.core.Status
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import uk.me.cmh.webappdemo.FakeRecentTrainTimesServer
 
 class FakeRecentTrainTimesServerEndToEndTest {
 

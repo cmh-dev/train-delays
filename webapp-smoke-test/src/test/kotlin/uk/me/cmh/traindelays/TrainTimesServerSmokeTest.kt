@@ -1,4 +1,4 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo

@@ -1,4 +1,4 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
-class TrainTimesServerEndToEndTest : TrainTimesServerBaseTest() {
+class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
 
     private val trainTimesServer = TrainTimesServer(8080)
 

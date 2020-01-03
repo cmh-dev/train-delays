@@ -13,7 +13,7 @@ shadowJar {
     archiveFileName = "cmh-fake-rtt.jar"
     mergeServiceFiles()
     manifest {
-        attributes 'Main-Class': "uk.me.cmh.webappdemo.FakeRecentTrainTimesServerKt"
+        attributes 'Main-Class': "uk.me.cmh.traindelays.FakeRecentTrainTimesServerKt"
     }
 }
 

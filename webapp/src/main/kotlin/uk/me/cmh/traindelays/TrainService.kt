@@ -1,4 +1,4 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import java.time.Duration
 import java.time.LocalTime

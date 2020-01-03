@@ -1,14 +1,12 @@
-package uk.me.cmh.webappdemo
+package uk.me.cmh.traindelays
 
 import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.webdriver.Http4kWebDriver
 import org.junit.Test
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 
-class TrainTimesServerTest : TrainTimesServerBaseTest() {
+class TrainDelaysServerTest : TrainDelaysServerBaseTest() {
 
     private val trainTimesServerApp = TrainTimesServerApp()
     private val driver = Http4kWebDriver(trainTimesServerApp)
