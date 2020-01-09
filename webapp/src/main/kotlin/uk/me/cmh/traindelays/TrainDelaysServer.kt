@@ -19,7 +19,7 @@ data class NoModelView(val template: String) : ViewModel {
 
 val port = Key("port", intType)
 val recentTrainTimesSiteUrl = Key("recent.train.times.url", stringType)
-val config = systemProperties() overriding ConfigurationProperties.fromResource("defaults.properties")
+val config = EnvironmentVariables() overriding ConfigurationProperties.fromResource("defaults.properties")
 
 fun TrainTimesServerApp() :HttpHandler {
 
@@ -35,7 +35,11 @@ fun TrainTimesServerApp() :HttpHandler {
 
 }
 
-fun TrainTimesServer() = TrainTimesServerApp().asServer(Jetty(config[port]))
+fun TrainTimesServer() :Http4kServer {
+    val serverPort = config[port]
+    println("Stating server using port $serverPort")
+    return TrainTimesServerApp().asServer(Jetty(serverPort))
+}
 
 
 fun main() {
