@@ -12,10 +12,18 @@ class TrainDelaysServerTest : TrainDelaysServerBaseTest() {
     private val driver = Http4kWebDriver(trainTimesServerApp)
 
     @Test
-    fun `the main page return the correct content`() {
+    fun `the main page returns the title`() {
         driver.navigate().to("/")
         checkMainContent(driver)
     }
+
+    /*
+    @Test
+    fun `the main page returns the train data results table`() {
+        driver.navigate().to("/")
+        checkMainContentForResultsTable(driver)
+    }
+     */
 
     @Test
     fun `a call to status should return okay`() {

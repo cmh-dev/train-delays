@@ -13,7 +13,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
 
-    private val trainTimesServer = TrainTimesServer(8080)
+    private val trainTimesServer = TrainTimesServer()
 
     @Before
     fun startTrainTimesServer() {
@@ -35,13 +35,20 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         assertThat(response.bodyString(), equalTo("okay"))
     }
 
-
     @Test
     fun `the main page should return the correct content`() {
         val driver = HtmlUnitDriver()
         driver.navigate().to("http://localhost:8080/")
         checkMainContent(driver)
     }
+    /*
+    @Test
+    fun `the main page returns the train data results table`() {
+        val driver = HtmlUnitDriver()
+        driver.navigate().to("http://localhost:8080/")
+        checkMainContentForResultsTable(driver)
+    }
+    */
 
 
 }

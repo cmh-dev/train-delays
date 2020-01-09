@@ -1,8 +1,11 @@
 package uk.me.cmh.traindelays
 
+import com.natpryce.konfig.*
+import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 import org.http4k.core.*
 import org.http4k.routing.bind
 import org.http4k.routing.routes
+import org.http4k.server.Http4kServer
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
 import org.http4k.template.HandlebarsTemplates
@@ -13,6 +16,10 @@ data class NoModelView(val template: String) : ViewModel {
         return template
     }
 }
+
+val port = Key("port", intType)
+val recentTrainTimesSiteUrl = Key("recent.train.times.url", stringType)
+val config = systemProperties() overriding ConfigurationProperties.fromResource("defaults.properties")
 
 fun TrainTimesServerApp() :HttpHandler {
 
@@ -28,11 +35,11 @@ fun TrainTimesServerApp() :HttpHandler {
 
 }
 
-fun TrainTimesServer(port :Int) = TrainTimesServerApp().asServer(Jetty(port))
+fun TrainTimesServer() = TrainTimesServerApp().asServer(Jetty(config[port]))
+
 
 fun main() {
-    val port :Int = System.getenv("PORT")?.toInt() ?: 8080
-    TrainTimesServer(port).start()
+    TrainTimesServer().start()
 }
 
 
