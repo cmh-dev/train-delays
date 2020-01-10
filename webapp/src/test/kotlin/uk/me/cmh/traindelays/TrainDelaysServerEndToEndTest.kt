@@ -41,14 +41,14 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         driver.navigate().to("http://localhost:8080/")
         checkMainContent(driver)
     }
-    /*
+
     @Test
     fun `the main page returns the train data results table`() {
         val driver = HtmlUnitDriver()
         driver.navigate().to("http://localhost:8080/")
         checkMainContentForResultsTable(driver)
     }
-    */
+
 
 
 }

@@ -1,33 +1,22 @@
 package uk.me.cmh.traindelays
 
-import org.http4k.core.Method
-import org.http4k.core.Request
-import org.http4k.webdriver.Http4kWebDriver
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
+import com.natpryce.hamkrest.hasSize
+import org.http4k.client.OkHttp
 import org.junit.Test
 
-
-class TrainDelaysServerTest : TrainDelaysServerBaseTest() {
-
-    private val trainTimesServerApp = TrainTimesServerApp()
-    private val driver = Http4kWebDriver(trainTimesServerApp)
+class TrainDelaysServerTest :TrainDelaysServerBaseTest() {
 
     @Test
-    fun `the main page returns the title`() {
-        driver.navigate().to("/")
-        checkMainContent(driver)
-    }
-
-    /*
-    @Test
-    fun `the main page returns the train data results table`() {
-        driver.navigate().to("/")
-        checkMainContentForResultsTable(driver)
-    }
-     */
-
-    @Test
-    fun `a call to status should return okay`() {
-        checkStatusResponse(trainTimesServerApp(Request(Method.GET, "/status")))
+    fun `a call to the recent train times site should return the correct data`() {
+        val trainServiceInfo: TrainServiceInfo = requestTrainDataFromRecentTrainTimes(
+            "Haslemere (HSL)",
+            "London Waterloo (WAT)"
+        )
+        assertThat(trainServiceInfo.startStation, equalTo("HSL"))
+        assertThat(trainServiceInfo.endStation, equalTo("WAT"))
+        assertThat(trainServiceInfo.trainServices, hasSize(equalTo(40)))
     }
 
 }
