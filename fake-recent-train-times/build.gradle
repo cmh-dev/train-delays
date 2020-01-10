@@ -19,5 +19,5 @@ shadowJar {
 
 dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
-    implementation group: "org.http4k", name: "http4k-template-handlebars", version: "3.206.0"
+    implementation group: "org.http4k", name: "http4k-template-thymeleaf", version: "3.206.0"
 }

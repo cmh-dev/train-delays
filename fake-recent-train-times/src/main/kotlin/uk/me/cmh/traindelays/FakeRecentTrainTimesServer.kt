@@ -6,7 +6,7 @@ import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
-import org.http4k.template.HandlebarsTemplates
+import org.http4k.template.ThymeleafTemplates
 import org.http4k.template.ViewModel
 import org.http4k.template.viewModel
 
@@ -18,7 +18,8 @@ data class NoModelView(val template: String) : ViewModel {
 
 fun FakeRecentTrainTimesServerApp() :HttpHandler {
 
-    val renderer = HandlebarsTemplates().CachingClasspath()
+    val renderer = ThymeleafTemplates().CachingClasspath()
+
     val view = Body.viewModel(renderer, TEXT_HTML).toLens()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
