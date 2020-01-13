@@ -11,9 +11,16 @@ import org.http4k.server.asServer
 import org.http4k.template.HandlebarsTemplates
 import org.http4k.template.ViewModel
 
-data class NoModelView(val template: String) : ViewModel {
+
+data class NoModelView(val template: String) :ViewModel {
     override fun template(): String {
         return template
+    }
+}
+
+data class TrainServiceInfoModelView(val trainServiceInfo: TrainServiceInfo) :ViewModel {
+    override fun template(): String {
+        return "templates/main"
     }
 }
 
@@ -28,7 +35,11 @@ fun TrainTimesServerApp() :HttpHandler {
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/" bind Method.GET to {
             Response(Status.OK)
-                .body(renderer.invoke(NoModelView("templates/main")))
+                .body(renderer.invoke(
+                    TrainServiceInfoModelView(
+                        requestTrainDataFromRecentTrainTimes("Haslemere (HSL)", "London Waterloo (WAT)"))
+                    )
+                )
                 .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
         }
     )
@@ -57,7 +68,7 @@ Op=Srch
 &MnScCt=2
  */
 
-fun requestTrainDataFromRecentTrainTimes(start :String, end :String) :TrainServiceInfo {
+fun requestTrainDataFromRecentTrainTimes(start :String, end :String) :TrainServiceInfo  {
     val client = OkHttp()
     val request = Request(Method.GET, "${config[recentTrainTimesSiteUrlKey]}/Home/Search")
         .query("Op","Srch")

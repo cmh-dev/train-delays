@@ -14,7 +14,7 @@ import org.junit.Test
 
 class FakeRecentTrainTimesServerEndToEndTest {
 
-    private val server = FakeRecentTrainTimesServer(8080)
+    private val server = FakeRecentTrainTimesServer()
 
     @Before
     fun setUp() {

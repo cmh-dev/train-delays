@@ -1,9 +1,11 @@
 package uk.me.cmh.traindelays
 
+import com.natpryce.konfig.*
 import org.http4k.core.*
 import org.http4k.core.ContentType.Companion.TEXT_HTML
 import org.http4k.routing.bind
 import org.http4k.routing.routes
+import org.http4k.server.Http4kServer
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
 import org.http4k.template.ThymeleafTemplates
@@ -15,6 +17,9 @@ data class NoModelView(val template: String) : ViewModel {
         return template
     }
 }
+
+val portKey = Key("port", intType)
+val config = EnvironmentVariables() overriding ConfigurationProperties.fromResource("defaults.properties")
 
 fun FakeRecentTrainTimesServerApp() :HttpHandler {
 
@@ -32,9 +37,15 @@ fun FakeRecentTrainTimesServerApp() :HttpHandler {
 
 }
 
-fun FakeRecentTrainTimesServer(port :Int) = FakeRecentTrainTimesServerApp().asServer(Jetty(port))
+fun FakeRecentTrainTimesServer() :Http4kServer {
+    val port = config[portKey]
+    return FakeRecentTrainTimesServer(port)
+}
+
+fun FakeRecentTrainTimesServer(port :Int) :Http4kServer {
+    return FakeRecentTrainTimesServerApp().asServer(Jetty(port))
+}
 
 fun main() {
-    val port :Int = System.getenv("PORT")?.toInt() ?: 8080
-    FakeRecentTrainTimesServer(port).start()
+    FakeRecentTrainTimesServer().start()
 }

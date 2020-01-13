@@ -3,7 +3,6 @@ package uk.me.cmh.traindelays
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
-import org.http4k.client.OkHttp
 import org.junit.Test
 
 class TrainDelaysServerTest :TrainDelaysServerBaseTest() {

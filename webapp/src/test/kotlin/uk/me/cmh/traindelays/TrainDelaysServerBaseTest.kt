@@ -39,7 +39,7 @@ abstract class TrainDelaysServerBaseTest {
     fun checkMainContentForResultsTable(driver: WebDriver) {
         val resultsTable = driver.findElement(By.tagName("table"))
         val rows = resultsTable.findElements(By.tagName("tr"))
-        assertThat(rows, hasSize(equalTo(8)))
+        assertThat(rows, hasSize(equalTo(1)))
     }
 
 }
