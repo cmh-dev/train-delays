@@ -8,7 +8,7 @@ import org.http4k.routing.routes
 import org.http4k.server.Http4kServer
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
-import org.http4k.template.HandlebarsTemplates
+import org.http4k.template.ThymeleafTemplates
 import org.http4k.template.ViewModel
 
 
@@ -30,7 +30,7 @@ val config = EnvironmentVariables() overriding ConfigurationProperties.fromResou
 
 fun TrainTimesServerApp() :HttpHandler {
 
-    val renderer = HandlebarsTemplates().CachingClasspath()
+    val renderer = ThymeleafTemplates().CachingClasspath()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/" bind Method.GET to {

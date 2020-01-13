@@ -6,7 +6,9 @@
 </head>
 <body>
     <table>
-        <tr></tr>
+        <tr th:each="trainService : ${model.trainServiceInfo.trainServices}">
+            <td th:text="${trainService}"></td>
+        </tr>
     </table>
 </body>
 </html>

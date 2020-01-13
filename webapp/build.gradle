@@ -21,7 +21,7 @@ shadowJar {
 
 dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
-    implementation group: "org.http4k", name: "http4k-template-handlebars", version: "3.206.0"
+    implementation group: "org.http4k", name: "http4k-template-thymeleaf", version: "3.206.0"
     testImplementation group: "org.http4k", name: "http4k-testing-webdriver", version: "3.206.0"
     testImplementation 'org.seleniumhq.selenium:htmlunit-driver:2.36.0'
     testImplementation project(":fake-recent-train-times")
