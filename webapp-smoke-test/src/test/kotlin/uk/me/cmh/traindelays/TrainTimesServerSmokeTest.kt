@@ -20,4 +20,11 @@ class TrainTimesServerSmokeTest {
         assertThat(response.bodyString(), equalTo("okay"))
     }
 
+    @Test
+    fun `the main page should return a 200 status code`() {
+        val client = OkHttp()
+        val response  = client(Request(Method.GET, "${endPoint}"))
+        assertThat(response.status, equalTo(Status.OK))
+    }
+
 }
