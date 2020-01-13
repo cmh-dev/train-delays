@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Search - Recent Train Times</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="/Content/site.css" rel="stylesheet"/>
+
+    <link href="/Content/themes/base/jquery.ui.core.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.resizable.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.selectable.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.accordion.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.button.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.dialog.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.slider.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.tabs.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.progressbar.css" rel="stylesheet"/>
+    <link href="/Content/themes/base/jquery.ui.theme.css" rel="stylesheet"/>
+
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+</head>
+<body>
+<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title" style="vertical-align:middle;"><a href="/">Recent Train Times</a></p>
+        </div>
+        <div class="float-right">
+            <nav>
+                <ul id="menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/Home/Help">Help</a></li>
+                    <li><a href="/Home/Contact">Contact</a></li>
+                    <li><a href="/Home/About">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div id="body">
+
+    <section class="content-wrapper main-content clear-fix">
+
+
+
+        <table style="border:1px solid black;">
+            <tr>
+                <td style="padding:4px;"><b>Quick Options</b>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvO&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">Hide Actual Arrival Times</a>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2&amp;SvcArS=SvcArS">Show Actual Arrival Spread</a>&nbsp;&nbsp;
+                    Change Statistic:
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=0&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">RT</a>                <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=2&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">2L</a>                                <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=10&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">10L</a>                <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=15&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">15L</a>                <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=20&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">20L</a>                <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=C&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">Cht</a>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2&amp;SvcLWE=SvcLWE">Show Likely Worst Experience</a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td style="padding:4px;">
+                    TOC Filter: <a href="/Home/Search?Op=Srch&Fr=Haslemere+%28HSL%29&To=London+Waterloo+%28WAT%29&TimTyp=D&TimDay=6a&Days=Wk&TimPer=4w&dtFr=&dtTo=&ShwTim=AvAr&MxArCl=5&TOC=84&ArrSta=5&MetAvg=Mea&MetSpr=RT&MxScDu=&MxSvAg=10&MnScCt=2">SW</a>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2&amp;DaySum=DaySum">Show Daily Summary</a>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2&amp;ArrGph=ArrGph">Show Arrival Graph</a>&nbsp;&nbsp;
+                    <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=10&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2">Display More Actual Times</a>&nbsp;&nbsp;            <a href="/Home/Search?Op=Srch&amp;Fr=Haslemere+%28HSL%29&amp;To=London+Waterloo+%28WAT%29&amp;TimTyp=D&amp;TimDay=6a&amp;Days=Wk&amp;TimPer=4w&amp;dtFr=&amp;dtTo=&amp;ShwTim=AvAr&amp;MxArCl=5&amp;TOC=All&amp;ArrSta=5&amp;MetAvg=Mea&amp;MetSpr=RT&amp;MxScDu=&amp;MxSvAg=10&amp;MnScCt=2&amp;SvcPcR=SvcPcR">Show % Service that Ran</a>&nbsp;&nbsp;
+                    <a href="#HeadingOptions">More...</a>
+                </td>
+            </tr>
+        </table>
+        <div style="display:none" id="divCookieMsg">
+            <h3>Cookies</h3>
+            <p>This website uses cookies.&nbsp;&nbsp;<a href="/Home/CookieInfo" target="_blank">More Information</a>&nbsp;&nbsp;<button onclick="acceptCookie()" style="font-size:small">Accept and Hide Message</button></p>
+        </div>
+        <h2>Search Results</h2>
+        <p>The table below lists all train services departing Haslemere (d HSL) and arriving in London Waterloo (a WAT) for the specified time period.  Also shown is the percentage of the time that each service arrived in London Waterloo no more than 5 minutes late, as well as the average arrival time of each service in London Waterloo.</p>
+        <table>
+            <tr>
+                <th>TOC&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th colspan="3">Scheduled Times&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th style="white-space:nowrap;">% Arrivals&nbsp;&nbsp;&nbsp;&nbsp;</th>                                      <th style="white-space:nowrap;" colspan="6">Actual Arrival Time in WAT</th>         </tr>
+            <tr>
+                <th></th>
+                <th style="white-space:nowrap;">d HSL</th>
+                <th style="white-space:nowrap;">a WAT</th>
+                <th style="white-space:nowrap;">Dur</th>
+                <th style="white-space:nowrap;">RT-5m late&nbsp;&nbsp;&nbsp;&nbsp;</th>                                     <th style="white-space:nowrap;">Average</th>
+                <th style="white-space:nowrap;">Today&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th style="white-space:nowrap;">Fri 10</th>
+                <th style="white-space:nowrap;">Thu 09</th>
+                <th style="white-space:nowrap;">Wed 08</th>
+                <th style="white-space:nowrap;">Tue 07</th>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">06:02</td>
+                <td style="white-space:nowrap;">07:08</td>
+                <td style="white-space:nowrap;">1h 6m </td>
+                <td style="white-space:nowrap;"><span style='color:#FF9900;'>86%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">07:13 <span style='color:#FF9900;font-weight:bold;'>5L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70644441">07:10 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70558971"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70524822">07:06 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70490738">07:12 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70456684">07:08 <span style='color:green;'>RT</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">06:16</td>
+                <td style="white-space:nowrap;">07:12</td>
+                <td style="white-space:nowrap;">56m </td>
+                <td style="white-space:nowrap;"><span style='color:red;'>62%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">07:16 <span style='color:#FF9900;font-weight:bold;'>4½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70643198">07:14 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70557752">07:27 <span style='color:red;'>15L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70523612">07:11 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70489526">07:18 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70455469">07:13 <span style='color:green;'>1L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">SW</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">06:29</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">07:34</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">1h 5m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:green;'>100%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">07:36 <span style='color:#FF9900;font-weight:bold;'>2½L</span></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70559249">07:36 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70525103">07:36 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70491015">07:39 <span style='color:#FF9900;'>5L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70456961">07:37 <span style='color:#FF9900;'>3L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">SW</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">06:48</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">07:44</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">56m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:green;'>100%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">07:46 <span style='color:#FF9900;font-weight:bold;'>2½L</span></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">SW</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">06:48</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">07:46</td>
+                <td style="white-space:nowrap;font-weight:bold;color:#0000FF;">58m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:green;'>100%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">07:47 <span style='color:green;font-weight:bold;'>1L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70644045">07:47 <span style='color:green;'>1L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70558584">07:47 <span style='color:green;'>1L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70524435">07:46 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70490351">07:49 <span style='color:#FF9900;'>3L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70456284">07:47 <span style='color:green;'>1L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:02</td>
+                <td style="white-space:nowrap;">07:53</td>
+                <td style="white-space:nowrap;">51m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>38%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:00 <span style='color:#FF9900;font-weight:bold;'>7L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70646764">08:01 <span style='color:#FF9900;'>8L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70561330">07:56 <span style='color:#FF9900;'>3L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70527240">07:58 <span style='color:#FF9900;'>5L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70493069">08:01 <span style='color:#FF9900;'>8L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70459051">07:58 <span style='color:#FF9900;'>5L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:08</td>
+                <td style="white-space:nowrap;">08:08</td>
+                <td style="white-space:nowrap;">1h 0m </td>
+                <td style="white-space:nowrap;"><span style='color:red;'>75%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:13 <span style='color:#FF9900;font-weight:bold;'>5½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70647566">08:09 <span style='color:green;'>1L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70562138">08:17 <span style='color:#FF9900;'>9L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70528053">08:12 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70493881">08:12 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70459875">08:08 <span style='color:green;'>RT</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:12</td>
+                <td style="white-space:nowrap;">08:10</td>
+                <td style="white-space:nowrap;">58m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>25%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:20 <span style='color:#FF9900;font-weight:bold;'>10L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70646694">08:14 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70561257">08:19 <span style='color:#FF9900;'>9L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70527163">08:14 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70493001">08:16 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70458973">08:18 <span style='color:#FF9900;'>8L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:25</td>
+                <td style="white-space:nowrap;">08:24</td>
+                <td style="white-space:nowrap;">59m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>0%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:36 <span style='color:red;font-weight:bold;'>12½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70645662">08:34 <span style='color:#FF9900;'>10L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70560200"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70526120">08:33 <span style='color:#FF9900;'>9L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70491967">08:37 <span style='color:red;'>13L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70457917">08:31 <span style='color:#FF9900;'>7L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:35</td>
+                <td style="white-space:nowrap;">08:31</td>
+                <td style="white-space:nowrap;">56m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>0%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:48 <span style='color:red;font-weight:bold;'>17½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70647684">08:37 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70562257">08:46 <span style='color:red;'>15L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70528173">08:45 <span style='color:red;'>14L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70493999">09:10 <span style='color:white;font-weight:bold;background-color:red;'>39L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70459991">08:42 <span style='color:red;'>11L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">07:39</td>
+                <td style="white-space:nowrap;">08:41</td>
+                <td style="white-space:nowrap;">1h 2m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>25%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">08:57 <span style='color:red;font-weight:bold;'>16½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70648485">08:45 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70563067">08:52 <span style='color:red;'>11L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70528986"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70494812">09:02 <span style='color:red;'>21L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70460802">08:48 <span style='color:#FF9900;'>7L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">08:01</td>
+                <td style="white-space:nowrap;">08:54</td>
+                <td style="white-space:nowrap;">53m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>27%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">09:08 <span style='color:red;font-weight:bold;'>14L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70648619">09:00 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70563202">09:18 <span style='color:red;'>24L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70529137"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70494953">09:24 <span style='color:red;'>30L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70460941">09:14 <span style='color:red;'>20L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">08:09</td>
+                <td style="white-space:nowrap;">09:18</td>
+                <td style="white-space:nowrap;">1h 9m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>38%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">09:31 <span style='color:red;font-weight:bold;'>13½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70646228">09:22 <span style='color:#FF9900;'>4L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70560791">09:24 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70526693"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70492538">09:34 <span style='color:red;'>16L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70458496">09:21 <span style='color:#FF9900;'>3L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">08:32</td>
+                <td style="white-space:nowrap;">09:30</td>
+                <td style="white-space:nowrap;">58m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>0%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">09:43 <span style='color:red;font-weight:bold;'>13½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70649570">09:40 <span style='color:#FF9900;'>10L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70564182">09:40 <span style='color:#FF9900;'>10L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70530105"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70495893">09:41 <span style='color:red;'>11L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70461878">09:39 <span style='color:#FF9900;'>9L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">08:32</td>
+                <td style="white-space:nowrap;">09:31</td>
+                <td style="white-space:nowrap;">59m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>0%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">09:45 <span style='color:red;font-weight:bold;'>14L</span></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+                <td style="white-space:nowrap;"></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">08:39</td>
+                <td style="white-space:nowrap;">09:45</td>
+                <td style="white-space:nowrap;">1h 6m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>38%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">10:02 <span style='color:red;font-weight:bold;'>17½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70647296">09:52 <span style='color:#FF9900;'>7L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70561870">09:47 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70527785">10:51 <span style='color:white;font-weight:bold;background-color:red;'>66L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70493612">09:50 <span style='color:#FF9900;'>5L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70459607">09:48 <span style='color:#FF9900;'>3L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">09:02</td>
+                <td style="white-space:nowrap;">09:55</td>
+                <td style="white-space:nowrap;">53m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>25%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">10:05 <span style='color:red;font-weight:bold;'>10½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70650554">10:03 <span style='color:#FF9900;'>8L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70565161">09:57 <span style='color:green;'>2L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70531082"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70496889">10:05 <span style='color:#FF9900;'>10L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70462847">10:00 <span style='color:#FF9900;'>5L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">09:15</td>
+                <td style="white-space:nowrap;">10:15</td>
+                <td style="white-space:nowrap;">1h 0m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>38%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">10:26 <span style='color:red;font-weight:bold;'>11½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70648784">10:14 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70563371">10:21 <span style='color:#FF9900;'>6L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70529319"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70495122">10:16 <span style='color:green;'>1L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70461106">10:18 <span style='color:#FF9900;'>3L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">09:32</td>
+                <td style="white-space:nowrap;">10:29</td>
+                <td style="white-space:nowrap;">57m </td>
+                <td style="white-space:nowrap;"><span style='color:red;'>62%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">10:36 <span style='color:#FF9900;font-weight:bold;'>7½L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70651442">10:29 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70566090">10:34 <span style='color:#FF9900;'>5L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70531957"><span style='background-color:#FF9900;color:#000000;'>CANC/NR</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70497812">10:29 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70463759">10:30 <span style='color:green;'>1L</span></a></td>
+            </tr>
+            <tr>
+                <td style="white-space:nowrap;">SW</td>
+                <td style="white-space:nowrap;">09:40</td>
+                <td style="white-space:nowrap;">10:40</td>
+                <td style="white-space:nowrap;">1h 0m </td>
+                <td style="white-space:nowrap;"><span style='color:white;font-weight:bold;background-color:red;'>50%</span></td>
+                <td style="white-space:nowrap;font-weight:bold;">10:50 <span style='color:red;font-weight:bold;'>10L</span></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70651326">10:39 <span style='color:green;'>RT</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70565972">10:45 <span style='color:#FF9900;'>5L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70531834">10:59 <span style='color:red;'>19L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70497690">10:41 <span style='color:green;'>1L</span></a></td>
+                <td style="white-space:nowrap;"><a style="text-decoration:none;" target="_blank" href="Service?ServiceId=70463622">10:40 <span style='color:green;'>RT</span></a></td>
+            </tr>
+        </table>
+        <p>
+            <a id="ShowHideExplanation" href="javascript:jsShowHideExplanation();">Show Explanation</a>
+            <a id="ShowHideTimingsAndTOCKey" href="javascript:jsShowHideTimesAndTocKey();">Show TOC and Timings Keys</a>
+        </p>
+        <div id="divExplanation" style="display:none;">
+            <h3>Explanation</h3>
+            <p>The statistic '% Arrivals RT-5m late' is the percentage of the time that the service arrived no more than 5 minutes late in the time period covered by this search (Mon - Fri between Mon 16 Dec 2019 and Mon 13 Jan 2020).</p><p>By this measure the best performing services are the <span style="font-weight:bold;color:#0000FF;">06:29</span>, <span style="font-weight:bold;color:#0000FF;">06:48</span> and <span style="font-weight:bold;color:#0000FF;">06:48</span> departures from Haslemere, which arrived no more than 5 minutes late <span style='color:white;font-weight:bold;background-color:green;'>100%</span> of the time.</p><p>When looking at the average arrival time remember it is just the average.  Sometimes the service arrived earlier than this, sometimes later.</p><p>To amend your search, scroll down to the search form below.  For a more detailed search example and walkthrough, please see the <a href="/Home/Help" target="blank">Help</a> page.</p>
+        </div>
+        <div id="divTOCKey" style="display:none;">
+            <h3>Train Operating Company (TOC) Key</h3>
+            <table>
+                <tr><td>SW</td><td>South Western Railway</td></tr>
+            </table>
+
+        </div>
+        <div id="divTimingsKey" style="display:none;">
+            <h3>Timings Key</h3>
+            <table>
+                <tr>
+                    <td>d HSL</td>
+                    <td>Scheduled departure time from Haslemere</td>
+                </tr>
+                <tr>
+                    <td>a WAT</td>
+                    <td>Scheduled arrival time in London Waterloo</td>
+                </tr>
+                <tr>
+                    <td>Dur</td>
+                    <td>Duration i.e. scheduled journey time</td>
+                </tr>
+                <tr>
+                    <td>RT</td>
+                    <td>Right Time i.e. 0 minutes late</td>
+                </tr>
+                <tr>
+                    <td>xL</td>
+                    <td>x minutes late, e.g. 3L = 3 minutes late</td>
+                </tr>
+                <tr>
+                    <td>*23:50</td>
+                    <td>For scheduled times, asterix indicates either departure on the<br />previous day or arrival on the following day.</td>
+                </tr>
+                <tr>
+                    <td>11:15</td>
+                    <td>For actual times, the reported arrival time of the service.</td>
+                </tr>
+                <tr>
+                    <td><i>11:15</i></td>
+                    <td>For actual times, <i>italics</i> indicates that the arrival time has been<br />interpolated based on reports from stations before/after.</td>
+                </tr>
+                <tr>
+                    <td>CANC/NR</td>
+                    <td>Service cancelled (or, rarely, service ran but no report logged).</td>
+                </tr>
+                <tr>
+                    <td>RAN/NR</td>
+                    <td>Service ran but no report logged at your from/to stations.</td>
+                </tr>
+                <tr>
+                    <td>Unknown</td>
+                    <td>Either no data or incomplete data is available for this particular<br />time period due to a system outage.</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Results Banner -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-6060108725699282"
+             data-ad-slot="7175871859"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        <script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-64707587-1', 'auto');
+              ga('send', 'pageview');
+
+            </script>
+        <h3>Data Completeness</h3>
+        <p>Data is present for all 84 hours in the time period being searched.</p>
+        <h3>Summary</h3>
+        <p><i>217 services have been found, of which 0 services have been discarded due to incomplete data.</i></p>
+        <p><i>Grouping has resulted in 37 schedules, of which 17 schedules (= 68 services) have been hidden as specified in the search criteria.</i></p>
+        <p><i>The remaining 20 schedules (= 149 services) are displayed above.</i></p>
+        <p><i>Data reflects train services up to:&nbsp;&nbsp;<b>14:27</b> on <b>Mon 13 Jan 2020</b>.</i></p>
+        <h2 id="HeadingOptions">Options</h2>
+        <form action="/Home/Search" id="frmSearch" method="get" name="frmSearch">    <input type="hidden" id="Op" name="Op" value="Srch" />
+            <table style="max-width:500px;">
+
+                <tr>
+                    <td>From:</td>
+                    <td><input id='Fr' name='Fr' type='text' style="width:250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value='Haslemere (HSL)' /> </td>
+                </tr>
+
+                <tr>
+                    <td>To:</td>
+                    <td><input id='To' name='To' type='text' style="width:250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value='London Waterloo (WAT)' /> </td>
+                </tr>
+                <tr>
+                    <td>Time:</td>
+                    <td>
+                        <select id='TimTyp' name='TimTyp' style="font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="A">Arrive</option><option value="D" selected>Depart</option></select>
+                        <select id='TimDay' name='TimDay' style="font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="12a">between 00:00 and 04:00</option><option value="2a">between 02:00 and 06:00</option><option value="4a">between 04:00 and 08:00</option><option value="6a" selected>between 06:00 and 10:00</option><option value="8a">between 08:00 and 12:00</option><option value="10a">between 10:00 and 14:00</option><option value="12p">between 12:00 and 16:00</option><option value="2p">between 14:00 and 18:00</option><option value="4p">between 16:00 and 20:00</option><option value="6p">between 18:00 and 22:00</option><option value="8p">between 20:00 and 00:00</option><option value="6a2">between 06:00 and 14:00</option><option value="2p2">between 14:00 and 22:00</option><option value="6a3">between 06:00 and 00:00</option><option value="A">Anytime</option></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Time Period:</td>
+                    <td>
+                        <select id='Days' name='Days' style="font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" onchange="jsRemoveMinimumServiceCountIfDaysNotMonToFri()" ><option value="Wk" selected>Mon - Fri</option><option value="Sa">Saturdays</option><option value="Su">Sundays</option><option value="We">Weekends</option><option value="Al">All Days</option></select>  for the <select id='TimPer' name='TimPer' style="width: 110px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" onchange="jsShowHideSpecificDates()" ><option value="7d">last 7 days</option><option value="2w">last 2 weeks</option><option value="3w">last 3 weeks</option><option value="4w" selected>last 4 weeks</option><option value="5w">last 5 weeks</option><option value="6w">last 6 weeks</option><option value="7w">last 7 weeks</option><option value="8w">last 8 weeks</option><option value="9w">last 9 weeks</option><option value="10w">last 10 weeks</option><option value="11w">last 11 weeks</option><option value="12w">last 12 weeks</option><option value="50d">last 50 days</option><option value="100d">last 100 days</option><option value="Cu">dates below</option></select>
+                    </td>
+                </tr>
+                <tr id="trSpecificDates" style="">
+                    <td style="white-space:nowrap;">Specific Dates:</td>
+                    <td>
+                        <input type="text" id="dtFr" name="dtFr" style="width:110px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value="16/12/2019" />
+                        to
+                        <input type="text" id="dtTo" name="dtTo" style="width:110px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value="13/01/2020" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <!-- The padded spaces stop the second column jumping when the advanced options are toggled -->
+                    <td style="white-space:nowrap;">Arrival Times:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <select id='ShwTim' name='ShwTim' style="width: 250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" onchange="jsShowHideNumberOfDaysOfActualTimes()" ><option value="AvO">Show average time only</option><option value="AvAr" selected>Show average & actual times</option></select>
+                    </td>
+                </tr>
+                <tr id="ActualTimeColumns" style="display:none;">
+                    <td style="white-space:nowrap;">Display:</td>
+                    <td>
+                        Up to <input id='MxArCl' name='MxArCl' type='text' style="text-align:center;width:40px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value='5' /> days of actual times.
+                    </td>
+                </tr>
+                <tr>
+                    <td style="white-space:nowrap;">Advanced:</td>
+                    <td>
+                        <input type="checkbox" id="ShwAdv" name="ShwAdv" value="ShwAdv"
+                               onclick="jsShowHideAdvancedOptions();" /> <label for="ShwAdv">Show Advanced Options</label>
+                    </td>
+                </tr>
+
+                <tr id="Advanced0" style="display:none;">
+                    <td style="white-space:nowrap;">Train Company:</td>
+                    <td>
+                        <select id='TOC' name='TOC' style="width: 250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="All" selected>All</option><option value="71">AW: Transport for Wales (71)</option><option value="79">CC: c2c (79)</option><option value="74">CH: Chiltern Railway (74)</option><option value="35">CS: Caledonian Sleeper (35)</option><option value="34">DC: Devon and Cornwall Railway (34)</option><option value="28">EM: East Midlands Trains (28)</option><option value="06">ES: Eurostar (06)</option><option value="26">FC: First Capital Connect (26)</option><option value="22">GC: Grand Central (22)</option><option value="88">GN: Govia Thameslink Railway (Great Northern) (88)</option><option value="61">GR: London North Eastern Railway (61)</option><option value="25">GW: Great Western Railway (25)</option><option value="81">GX: Gatwick Express (81)</option><option value="24">HC: Heathrow Connect (24)</option><option value="55">HT: First Hull Trains (55)</option><option value="86">HX: Heathrow Express (86)</option><option value="85">IL: Island Lines (85)</option><option value="21">LE: Greater Anglia (21)</option><option value="29">LM: West Midlands Trains (29)</option><option value="30">LO: London Overground (30)</option><option value="91">LT: LUL Bakerloo Line (91)</option><option value="93">LT: LUL District Line ? Richmond (93)</option><option value="90">LT: LUL District Line ? Wimbledon (90)</option><option value="64">ME: Merseyrail (64)</option><option value="23">NT: Northern Rail (23)</option><option value="51">NY: North Yorkshire Moors Railway (51)</option><option value="80">SE: Southeastern (80)</option><option value="--">SJ: Sheffield Supertram (--)</option><option value="82">SN: Southern (82)</option><option value="60">SR: First Scotrail (60)</option><option value="84">SW: South Western Railway (84)</option><option value="88">TL: Govia Thameslink Railway (Thameslink) (88)</option><option value="20">TP: TransPennine Express (20)</option><option value="56">TW: Nexus (Tyne & Wear Metro) (56)</option><option value="65">VT: Virgin Trains (65)</option><option value="50">WR: West Coast Railway Co. (50)</option><option value="27">XC: CrossCountry (27)</option><option value="33">XR: TFL Rail (33)</option></select>
+                    </td>
+                </tr>
+                <tr id="Advanced1" style="display:none;">
+                    <td style="white-space:nowrap;">Arr. Statistic(s):</td>
+                    <td>
+                        <select id='ArrSta' name='ArrSta' style="width: 250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="0">% arrival exactly on time</option><option value="2">% arrivals no more than 2 mins late</option><option value="5" selected>% arrivals no more than 5 mins late</option><option value="10">% arrivals no more than 10 mins late</option><option value="15">% arrivals no more than 15 mins late</option><option value="20">% arrivals no more than 20 mins late</option><option value="30">% arrivals no more than 30 mins late</option><option value="60">% arrivals no more than 60 mins late</option><option value="N">All statistics (numbers)</option><option value="C">All statistics (colour chart)</option></select>
+                    </td>
+                </tr>
+                <tr id="Advanced2" style="display:none;">
+                    <td style="white-space:nowrap;vertical-align:top;padding-top:5px;" rowspan="2">Basic Statistics:
+                        <br />
+                        <i>(<a href="javascript:jsShowHideBasicDefinitions();">Definitions</a>)</i>
+
+                    </td>
+                    <td>
+                        <input type="checkbox" id="SvcCtA" name="SvcCtA" value="SvcCtA" /> <label for="SvcCtA">Show Count All</label><span id='spAdvDefinition0' style='display:none;'><br /><i>Definition: count of services that ran + count of services that were cancelled or, rarely, not reported</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced3" style="display:none;">
+                    <td>
+                        <input type="checkbox" id="SvcCtR" name="SvcCtR" value="SvcCtR" /> <label for="SvcCtR">Show Count Ran</label><span id='spAdvDefinition1' style='display:none;'><br /><i>Definition: count of services that ran</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced4" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcCtC" name="SvcCtC" value="SvcCtC" /> <label for="SvcCtC">Show Count CANC/NR</label><span id='spAdvDefinition2' style='display:none;'><br /><i>Definition: count of services that were cancelled or, rarely, not reported</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced5" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcPcR" name="SvcPcR" value="SvcPcR" /> <label for="SvcPcR">Show % of services that ran</label><span id='spAdvDefinition3' style='display:none;'><br /><i>Definition: Count Ran / Count All * 100</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced6" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcPcC" name="SvcPcC" value="SvcPcC" /> <label for="SvcPcC">Show % of services CANC/NR</label><span id='spAdvDefinition4' style='display:none;'><br /><i>Definition: Count CANC/NR / Count All * 100</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced7" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcDtF" name="SvcDtF" value="SvcDtF" /> <label for="SvcDtF">Show date service first ran</label><span id='spAdvDefinition5' style='display:none;'><br /><i>Definition: Date service first ran in specified time period.</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced8" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcDtL" name="SvcDtL" value="SvcDtL" /> <label for="SvcDtL">Show date service last ran</label><span id='spAdvDefinition6' style='display:none;'><br /><i>Definition: Date service last ran in specified time period.</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced9" style="display:none;">
+                    <td style="white-space:nowrap;vertical-align:top;padding-top:5px;" rowspan="2">Adv. Statistics:
+                        <br />
+                        <i>(<a href="javascript:jsShowHideAdvancedDefinitions();">Definitions</a>)</i>
+
+                    </td>
+                    <td>
+                        <input type="checkbox" id="SvcArS" name="SvcArS" value="SvcArS" /> <label for="SvcArS">Show Arrival Time Spread</label><span id='spAdvDefinition20' style='display:none;'><br /><i>Definition: calculation method specified below.</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced10" style="display:none;">
+                    <td>
+                        <input type="checkbox" id="SvcPfS" name="SvcPfS" value="SvcPfS" /> <label for="SvcPfS">Show Performance Score</label><span id='spAdvDefinition21' style='display:none;'><br /><i>Definition: (CountRT + CountRTto2L + CountRTto5L + CountRTto10L + CountRTto15L + CountRTto20L) / (6 * Count All) * 100.</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced11" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="SvcLWE" name="SvcLWE" value="SvcLWE" /> <label for="SvcLWE">Show Likely Worst Experience</label><span id='spAdvDefinition22' style='display:none;'><br /><i>Definition: 80% point in ranked arrival time list.</i></span>
+                    </td>
+                </tr>
+                <tr id="Advanced12" style="display:none;">
+                    <td style="white-space:nowrap;">Average Calc:</td>
+                    <td>
+                        <select id='MetAvg' name='MetAvg' style="width: 250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="Mea" selected>Mean (typical everyday average)</option><option value="Med">Median (middle value in ranked list)</option><option value="Mod">Mode (most common time)</option></select>
+                    </td>
+                </tr>
+                <tr id="Advanced13" style="display:none;">
+                    <td style="white-space:nowrap;">Spread Calc:</td>
+                    <td>
+                        <select id='MetSpr' name='MetSpr' style="width: 250px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" ><option value="RT" selected>Range (displayed as arrival times)</option><option value="RM">Range (displayed as # minutes)</option><option value="IQRT">Interquartile Range (arrival times)</option><option value="IQRM">Interquartile Range (# minutes)</option><option value="SDT">Standard Deviation (arrival times)</option><option value="SDM">Standard Deviation (# minutes)</option></select>
+                    </td>
+                </tr>
+                <tr id="Advanced14" style="display:none;">
+                    <td style="white-space:nowrap;">Other Visuals:</td>
+                    <td>
+                        <input type="checkbox" id="DaySum" name="DaySum" value="DaySum" /> <label for="DaySum">Show a Daily Summary of selected statistics</label>
+                    </td>
+                </tr>
+                <tr id="Advanced15" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="ArrGph" name="ArrGph" value="ArrGph" /> <label for="ArrGph">Show a graph of actual arrival times</label>
+                    </td>
+                </tr>
+                <tr id="Advanced16" style="display:none;">
+                    <td style="white-space:nowrap;">Hide:</td>
+                    <td>
+                        Hide services where sch. duration > <input id='MxScDu' name='MxScDu' type='text' style="text-align:center;width:40px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" /> minutes
+                    </td>
+                </tr>
+                <tr id="Advanced17" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        Hide services not run in the last <input id='MxSvAg' name='MxSvAg' type='text' style="text-align:center;width:40px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value='10' /> days
+                    </td>
+                </tr>
+                <tr id="Advanced18" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        Hide services where Count Ran < <input id='MnScCt' name='MnScCt' type='text' style="text-align:center;width:40px;font-size: .95em; font-family: 'Segoe UI', Verdana, Helvetica, Sans-Serif;" value='2' />
+                    </td>
+                </tr>
+                <tr id="Advanced19" style="display:none;">
+                    <td style="white-space:nowrap;">Exclude:</td>
+                    <td>
+                        <input type="checkbox" id="ExIntS" name="ExIntS" value="ExIntS" /> <label for="ExIntS">Exclude interpolated station timings</label>
+                    </td>
+                </tr>
+                <tr id="Advanced20" style="display:none;">
+                    <td style="white-space:nowrap;"></td>
+                    <td>
+                        <input type="checkbox" id="ExCaSt" name="ExCaSt" value="ExCaSt" /> <label for="ExCaSt">Exclude cancellations from Arr. Stats & Perf. Score</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="white-space:nowrap;">Search: </td>
+                    <td>
+                        <input type="button" value="Get Regular Train Times" onclick="jsSearchSTD();" /> <input type="button" value="Get All Train Times" onclick="jsSearchALL();" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <h3>Another Search?</h3>
+        <p>Amend the criteria above to search again or <a href="/" target="_blank">open a new window</a> (to start a new search whilst retaining these results).</p>
+
+        <h2>Data Source and Validity</h2>
+        <p>The information shown on Recent Train Times is sourced from <a href="https://www.networkrail.co.uk/">Network Rail</a> via their <a href="https://datafeeds.networkrail.co.uk/" target="_blank">Open Data Feeds</a>, augmented with additional data sourced from the <a href="https://www.raildeliverygroup.com/">Rail Delivery Group</a> via their <a href="http://datafeeds.nationalrail.co.uk/">Darwin</a> system.</p>
+        <p>Recent Train Times is not part of Network Rail or the Rail Delivery Group and is not an official rail industry body.  Nor is Recent Train Times a source of official rail performance information / statistics.</p>
+        <p>For official rail performance information, please see <a href="http://www.rail-reg.gov.uk/server/show/nav.1527" target="_blank">Office of Rail Regulation</a>, <a href="http://www.networkrail.co.uk/about/performance/" target="_blank">Network Rail</a>, <a href="https://www.ons.gov.uk/" target="_blank">UK National Statistics</a> and <a href="https://www.gov.uk/government/collections/rail-statistics" target="_blank">Gov.uk</a>.</p>
+    </section>
+</div>
+<footer>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p>&copy; 2020 - Recent Train Times</p>
+        </div>
+    </div>
+</footer>
+
+<script src="/Scripts/jquery-1.8.2.js"></script>
+
+<script src="/Scripts/jquery-ui-1.8.24.js"></script>
+
+<script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<script type="text/javascript" src="/Scripts/Custom/station-list.js?version=20180630_01"></script>
+<script type="text/javascript">
+    $(function () {
+        var stations = jsGetStations();
+        $("#Fr").autocomplete({
+            source: stations,
+            minLength: 2
+        });
+        $("#To").autocomplete({
+            source: stations,
+            minLength: 2
+        });
+    });
+</script>
+<script type="text/javascript">
+    function jsShowHideNumberOfDaysOfActualTimes() {
+        var bShow = document.getElementById("ShwTim").value == "AvAr";
+        document.getElementById("ActualTimeColumns").style.display = (bShow ? "" : "none");
+    }
+    jsShowHideNumberOfDaysOfActualTimes();
+</script>
+<script type="text/javascript">
+    function jsShowHideAdvancedOptions() {
+        var bShow = document.getElementById("ShwAdv").checked;
+        if (bShow) {
+            for (var i = 0; i < 21; i++) {
+                document.getElementById("Advanced" + i).style.display = "";
+            }
+        }
+        else {
+            for (var i = 0; i < 21; i++) {
+                document.getElementById("Advanced" + i).style.display = "none";
+            }
+        }
+    }
+    jsShowHideAdvancedOptions();
+</script>
+<script type="text/javascript">
+    var bShowBasicDefinitions = false;
+    function jsShowHideBasicDefinitions() {
+        bShowBasicDefinitions = !bShowBasicDefinitions;
+        if (bShowBasicDefinitions) {
+            for (var i = 0; i < 7; i++) {
+                document.getElementById("spAdvDefinition" + i).style.display = "";
+            }
+        }
+        else {
+            for (var i = 0; i < 7; i++) {
+                document.getElementById("spAdvDefinition" + i).style.display = "none";
+            }
+        }
+    }
+    var bShowAdvancedDefinitions = false;
+    function jsShowHideAdvancedDefinitions() {
+        bShowAdvancedDefinitions = !bShowAdvancedDefinitions;
+        if (bShowAdvancedDefinitions) {
+            for (var i = 20; i < 23; i++) {
+                document.getElementById("spAdvDefinition" + i).style.display = "";
+            }
+        }
+        else {
+            for (var i = 20; i < 23; i++) {
+                document.getElementById("spAdvDefinition" + i).style.display = "none";
+            }
+        }
+    }
+</script>
+<script>
+     function jsSearchSTD() {
+         if (document.getElementById("MxSvAg").value == "") document.getElementById("MxSvAg").value = "10";
+         if (document.getElementById("MnScCt").value == "")  document.getElementById("MnScCt").value = "2";
+         document.getElementById("frmSearch").submit();
+     }
+ </script>
+<script>
+     function jsSearchALL() {
+         document.getElementById("MxSvAg").value = "";
+         document.getElementById("MnScCt").value = "";
+         document.getElementById("frmSearch").submit();
+     }
+ </script>
+<script type="text/javascript">
+    var bShowExplanation = false;
+    var bShowTimesAndTocKey = false;
+    var bShowColourChartKey = false;
+    var bShowArrivalGraphKey = false;
+    function jsShowHideExplanation() {
+        if (bShowTimesAndTocKey) jsShowHideTimesAndTocKey();
+        if (bShowColourChartKey) jsShowHideColourChartKey();
+        bShowExplanation = !bShowExplanation;
+        if (bShowExplanation) {
+            document.getElementById("divExplanation").style.display = "";
+            document.getElementById("ShowHideExplanation").innerText = "Hide Explanation";
+        }
+        else {
+            document.getElementById("divExplanation").style.display = "none";
+            document.getElementById("ShowHideExplanation").innerText = "Show Explanation";
+        }
+    }
+    function jsShowHideTimesAndTocKey() {
+        if (bShowExplanation) jsShowHideExplanation();
+        if (bShowColourChartKey) jsShowHideColourChartKey();
+        bShowTimesAndTocKey = !bShowTimesAndTocKey;
+        if (bShowTimesAndTocKey) {
+            document.getElementById("divTimingsKey").style.display = "";
+            var o = document.getElementById("divTOCKey");
+            if (o != null) o.style.display = "";
+            document.getElementById("ShowHideTimingsAndTOCKey").innerText = "Hide TOC and Timings Keys";
+        }
+        else {
+            document.getElementById("divTimingsKey").style.display = "none";
+            var o = document.getElementById("divTOCKey");
+            if (o != null) o.style.display = "none";
+            document.getElementById("ShowHideTimingsAndTOCKey").innerText = "Show TOC and Timings Keys";
+        }
+    }
+    function jsShowHideColourChartKey() {
+        if (bShowExplanation) jsShowHideExplanation();
+        if (bShowTimesAndTocKey) jsShowHideTimesAndTocKey();
+        bShowColourChartKey = !bShowColourChartKey;
+        if (bShowColourChartKey) {
+            document.getElementById("divColourChartKey").style.display = "";
+            document.getElementById("ShowHideColourChartKey").innerText = "Hide Colour Chart Key";
+        }
+        else {
+            document.getElementById("divColourChartKey").style.display = "none";
+            document.getElementById("ShowHideColourChartKey").innerText = "Show Colour Chart Key";
+        }
+    }
+    function jsShowHideArrivalGraphKey() {
+        bShowArrivalGraphKey = !bShowArrivalGraphKey;
+        if (bShowArrivalGraphKey) {
+            document.getElementById("divArrivalGraphKey").style.display = "";
+            document.getElementById("ShowHideArrivalGraphKey").innerText = "Hide Graph Key";
+        }
+        else {
+            document.getElementById("divArrivalGraphKey").style.display = "none";
+            document.getElementById("ShowHideArrivalGraphKey").innerText = "Show Graph Key";
+        }
+    }
+</script>
+<script type="text/javascript">
+       $(function () {
+           $('#dtFr').datepicker({ dateFormat: 'dd/mm/yy' });
+       });
+       $(function () {
+           $('#dtTo').datepicker({ dateFormat: 'dd/mm/yy' });
+       });
+       function jsShowHideSpecificDates() {
+           var oSelect = document.getElementById('TimPer');
+           var oTrSpecificDates = document.getElementById('trSpecificDates');
+           if (oSelect.selectedIndex == (oSelect.options.length - 1)) {
+               oTrSpecificDates.style.display = "";
+           }
+           else {
+               oTrSpecificDates.style.display = "none";
+           }
+       }
+    jsShowHideSpecificDates();
+</script>
+<script type="text/javascript">
+    function setRttCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        var path = "path=/";
+        document.cookie = cname + "=" + cvalue + "; " + expires + "; " + path;
+    }
+    function getRttCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+    function checkCookie() {
+        var cookieAccept = getRttCookie("cookieAccept");
+        if (cookieAccept != "Y") {
+            document.getElementById('divCookieMsg').style.display = "block";
+        }
+    }
+    function acceptCookie() {
+        setRttCookie("cookieAccept", "Y", 90);
+        document.getElementById('divCookieMsg').style.display = "none";
+    }
+    checkCookie();
+</script>
+<script type="text/javascript">
+    function jsRemoveMinimumServiceCountIfDaysNotMonToFri() {
+        var oSelect = document.getElementById('Days');
+        var oMnScCt = document.getElementById('MnScCt');
+        var oMxSvAg = document.getElementById('MxSvAg');
+        if (oSelect.selectedIndex == -1) return;
+        if (oSelect.options[oSelect.selectedIndex].value != "Wk") {
+            oMnScCt.value = "";
+            oMxSvAg.value = "35";
+        }
+    }
+    jsRemoveMinimumServiceCountIfDaysNotMonToFri();
+</script>
+
+
+</body>
+</html>

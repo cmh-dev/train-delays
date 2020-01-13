@@ -44,17 +44,19 @@ fun parseTrainData(html: String): TrainServiceInfo {
         it
             .takeLast(it.size - 2)
             .forEachIndexed { index, actualEndTimeStr ->
-                val actualEndTime = when(actualEndTimeStr) {
-                    "CANC/NR" -> null
-                    else -> LocalTime.parse(actualEndTimeStr.split(" ")[0])
+                if (actualEndTimeStr != "" ) {
+                    val actualEndTime = when (actualEndTimeStr) {
+                        "CANC/NR" -> null
+                        else -> LocalTime.parse(actualEndTimeStr.split(" ")[0])
+                    }
+                    val trainService = TrainService(
+                        serviceDates[index],
+                        scheduledStartTime,
+                        scheduledEndTime,
+                        actualEndTime
+                    )
+                    trainServices.add(trainService)
                 }
-                val trainService = TrainService(
-                    serviceDates[index],
-                    scheduledStartTime,
-                    scheduledEndTime,
-                    actualEndTime
-                )
-                trainServices.add(trainService)
             }
     }
 
@@ -65,3 +67,4 @@ fun parseTrainData(html: String): TrainServiceInfo {
     )
 
 }
+

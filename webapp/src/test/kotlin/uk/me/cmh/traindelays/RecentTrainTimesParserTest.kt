@@ -55,4 +55,11 @@ class TrainDataTableParserTest {
         assertThat(expectedRunService.delay(), equalTo(22L))
     }
 
+    @Test
+    fun `a response with blanks in should be correctly parsed with the blank ones not present`() {
+        val htmlWithBlanks = javaClass.getResource("/test-html/recent-train-times-blanks.html").readText()
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(htmlWithBlanks)
+        assertThat(trainServiceInfo.trainServices, hasSize(equalTo(89)))
+    }
+
 }
