@@ -30,7 +30,7 @@ class FakeRecentTrainTimesServerEndToEndTest {
     @Test
     fun `the status of the server is okay`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8080/status"))
+        val response  = client(Request(Method.GET, "http://localhost:8081/status"))
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
@@ -38,7 +38,7 @@ class FakeRecentTrainTimesServerEndToEndTest {
     @Test
     fun `any request to the search page will return the fake search results`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8080/Home/Search"))
+        val response  = client(Request(Method.GET, "http://localhost:8081/Home/Search"))
         val contentTypeHeaderValue = response.headers
             .first { header -> header.first.toLowerCase() == "content-type" }
             .second ?: ""
