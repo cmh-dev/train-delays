@@ -27,19 +27,4 @@ abstract class TrainDelaysServerBaseTest {
         fakeRecentTrainTimesServer.stop()
     }
 
-    fun checkStatusResponse(response: Response) {
-        assertThat(response.status, equalTo(Status.OK))
-        assertThat(response.bodyString(), equalTo("okay"))
-    }
-
-    fun checkMainContent(driver: WebDriver) {
-        assertThat(driver.title, equalTo("Train Times"))
-    }
-
-    fun checkMainContentForResultsTable(driver: WebDriver) {
-        val resultsTable = driver.findElement(By.tagName("table"))
-        val rows = resultsTable.findElements(By.tagName("tr"))
-        assertThat(rows, hasSize(equalTo(40)))
-    }
-
 }
