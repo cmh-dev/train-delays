@@ -61,5 +61,13 @@ class TrainDataTableParserTest {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(htmlWithBlanks)
         assertThat(trainServiceInfo.trainServices, hasSize(equalTo(89)))
     }
+    @Test
+    fun `a response with dots and blanks in should be correctly parsed with those not present`() {
+        val htmlWithDotsAndBlanks = javaClass.getResource("/test-html/recent-train-times-dots-blanks.html").readText()
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(htmlWithDotsAndBlanks)
+        assertThat(trainServiceInfo.trainServices, hasSize(equalTo(86)))
+    }
+
+
 
 }
