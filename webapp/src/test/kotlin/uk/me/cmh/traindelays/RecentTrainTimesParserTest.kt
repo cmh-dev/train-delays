@@ -32,7 +32,18 @@ class TrainDataTableParserTest {
                 trainService.date == "Fri 20"
                     && trainService.scheduledStart == LocalTime.parse("08:01")
             }
-        assertThat(expectedCancelledService.actualEnd == null, equalTo(true))
+        assertThat(expectedCancelledService.isCancelled(), equalTo(true))
+    }
+
+    @Test
+    fun `delay of a cancelled service should be null`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        val expectedCancelledService = trainServiceInfo.trainServices
+            .first { trainService ->
+                trainService.date == "Fri 20"
+                        && trainService.scheduledStart == LocalTime.parse("08:01")
+            }
+        assertThat(expectedCancelledService.delay() == null, equalTo(true))
     }
 
     @Test
@@ -53,6 +64,16 @@ class TrainDataTableParserTest {
                     && trainService.scheduledStart == LocalTime.parse("07:13")
         }
         assertThat(expectedRunService.delay(), equalTo(22L))
+    }
+
+    @Test
+    fun `delayed train should not be shown as cancelled from parsed data`() {
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
+        val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
+            trainService.date == "Fri 20"
+                    && trainService.scheduledStart == LocalTime.parse("07:13")
+        }
+        assertThat(expectedRunService.isCancelled(), equalTo(false))
     }
 
     @Test

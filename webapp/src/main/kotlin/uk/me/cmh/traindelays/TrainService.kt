@@ -8,6 +8,8 @@ data class TrainService(val date: String,
                         val scheduledEnd: LocalTime,
                         val actualEnd: LocalTime?) {
 
-    fun delay() = Duration.between(scheduledEnd, actualEnd).toMinutes()
+    fun delay() = actualEnd?.let { Duration.between(scheduledEnd, actualEnd).toMinutes() }
+
+    fun isCancelled() = actualEnd == null
 
 }
