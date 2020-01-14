@@ -53,11 +53,16 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
     }
 
    private fun checkMainContentForResultsTable(driver: WebDriver) {
-        val resultsTable = driver.findElement(By.tagName("table"))
-        val rows = resultsTable.findElements(By.tagName("tr"))
-        assertThat(rows, hasSize(equalTo(40)))
-        val dataColumns = rows.first().findElements(By.tagName("td"))
-        assertThat(dataColumns, hasSize(equalTo(5)))
+
+       val resultsTable = driver.findElement(By.tagName("table"))
+       val rows = resultsTable.findElements(By.tagName("tr"))
+
+       assertThat(rows, hasSize(equalTo(40)))
+
+       val dataColumns = rows.first().findElements(By.tagName("td"))
+       assertThat(dataColumns, hasSize(equalTo(5)))
+       assertThat(dataColumns[4].text, equalTo("1"))
+
     }
 
 }

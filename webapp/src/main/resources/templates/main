@@ -11,7 +11,7 @@
             <td th:text="${trainService.scheduledStart}"></td>
             <td th:text="${trainService.scheduledEnd}"></td>
             <td th:text="${trainService.actualEnd}"></td>
-            <td th:text="${trainService}"></td>
+            <td th:text="${trainService.isCancelled}? 'CANCELLED' : ${trainService.delay}"></td>
         </tr>
     </table>
 </body>
