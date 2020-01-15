@@ -57,11 +57,11 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
        val resultsTable = driver.findElement(By.tagName("table"))
        val rows = resultsTable.findElements(By.tagName("tr"))
 
-       assertThat(rows, hasSize(equalTo(40)))
+       assertThat(rows, hasSize(equalTo(7)))
 
        val dataColumns = rows.first().findElements(By.tagName("td"))
        assertThat(dataColumns, hasSize(equalTo(5)))
-       assertThat(dataColumns[4].text, equalTo("1"))
+       assertThat(dataColumns[4].text, equalTo("20"))
 
     }
 

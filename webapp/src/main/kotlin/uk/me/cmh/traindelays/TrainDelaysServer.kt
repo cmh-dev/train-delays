@@ -90,7 +90,7 @@ fun requestTrainDataFromRecentTrainTimes(start :String, end :String) :TrainServi
         .query("MxSvAg","10")
         .query("MnScCt","2")
     val response = client(request)
-    return parseTrainData(response.bodyString())
+    return parseTrainData(response.bodyString()).filterByDelayRepayEligable()
 }
 
 fun TrainTimesServer() :Http4kServer {
