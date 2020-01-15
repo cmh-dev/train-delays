@@ -1,7 +1,13 @@
 package uk.me.cmh.traindelays
 
-import uk.me.cmh.traindelays.TrainService
-
 data class TrainServiceInfo(val startStation: String,
                             val endStation: String,
-                            val trainServices: List<TrainService>)
+                            val trainServices: List<TrainService>) {
+
+    fun filterByDelayRepayEligable(): TrainServiceInfo {
+        return this.copy(trainServices = this.trainServices.filter {
+                trainService -> trainService.isCancelled() || trainService.delay()!! >= 15
+        })
+    }
+
+}
