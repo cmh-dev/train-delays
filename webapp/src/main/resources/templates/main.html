@@ -5,15 +5,17 @@
     <title>Train Times</title>
 </head>
 <body>
-<h4 th:text="${model.trainServiceInfo.startStation} + ' to ' + ${model.trainServiceInfo.endStation}"></h4>
-<table border="1" cellpadding="2">
-    <tr th:each="trainService : ${model.trainServiceInfo.trainServices}">
-        <td th:text="${trainService.date}"></td>
-        <td th:text="${trainService.scheduledStart}"></td>
-        <td th:text="${trainService.scheduledEnd}"></td>
-        <td th:text="${trainService.actualEnd}"></td>
-        <td th:text="${trainService.isCancelled}? 'CANCELLED' : ${trainService.delay}"></td>
-    </tr>
-</table>
+<div th:each="trainServiceInfo : ${model.trainServiceInfoList}">
+    <h4 th:text="${trainServiceInfo.startStation} + ' to ' + ${trainServiceInfo.endStation}"></h4>
+    <table border="1" cellpadding="2">
+        <tr th:each="trainService : ${trainServiceInfo.trainServices}">
+            <td th:text="${trainService.date}"></td>
+            <td th:text="${trainService.scheduledStart}"></td>
+            <td th:text="${trainService.scheduledEnd}"></td>
+            <td th:text="${trainService.actualEnd}"></td>
+            <td th:text="${trainService.isCancelled}? 'CANCELLED' : ${trainService.delay}"></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

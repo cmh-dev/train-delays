@@ -11,7 +11,8 @@ class TrainDelaysServerTest :TrainDelaysServerBaseTest() {
     fun `a call to the recent train times site should return the correct filtered data`() {
         val trainServiceInfo: TrainServiceInfo = requestTrainDataFromRecentTrainTimes(
             "Haslemere (HSL)",
-            "London Waterloo (WAT)"
+            "London Waterloo (WAT)",
+            "6a"
         )
         assertThat(trainServiceInfo.startStation, equalTo("HSL"))
         assertThat(trainServiceInfo.endStation, equalTo("WAT"))

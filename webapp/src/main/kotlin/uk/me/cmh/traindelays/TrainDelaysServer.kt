@@ -18,7 +18,7 @@ data class NoModelView(val template: String) :ViewModel {
     }
 }
 
-data class TrainServiceInfoModelView(val trainServiceInfo: TrainServiceInfo) :ViewModel {
+data class TrainServiceInfoModelView(val trainServiceInfoList: List<TrainServiceInfo>) :ViewModel {
     override fun template(): String {
         return "templates/main"
     }
@@ -37,7 +37,8 @@ fun TrainTimesServerApp() :HttpHandler {
             Response(Status.OK)
                 .body(renderer.invoke(
                     TrainServiceInfoModelView(
-                        requestTrainDataFromRecentTrainTimes("Haslemere (HSL)", "London Waterloo (WAT)"))
+                        listOf(requestTrainDataFromRecentTrainTimes("Haslemere (HSL)",
+                            "London Waterloo (WAT)", "6a")))
                     )
                 )
                 .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
@@ -68,14 +69,14 @@ Op=Srch
 &MnScCt=2
  */
 
-fun requestTrainDataFromRecentTrainTimes(start :String, end :String) :TrainServiceInfo  {
+fun requestTrainDataFromRecentTrainTimes(start :String, end :String, timeOfDay :String) :TrainServiceInfo  {
     val client = OkHttp()
     val request = Request(Method.GET, "${config[recentTrainTimesSiteUrlKey]}/Home/Search")
         .query("Op","Srch")
         .query("Fr",start)
         .query("To",end)
         .query("TimTyp","D")
-        .query("TimDay","6a")
+        .query("TimDay",timeOfDay)
         .query("Days","Wk")
         .query("TimPer","4w")
         .query("dtFr","")
