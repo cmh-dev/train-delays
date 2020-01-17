@@ -3,7 +3,7 @@ jdk: openjdk8
 install: echo "skip 'gradle assemble' step"
 jobs:
   include:
-    - stage: "build and deploy fake ftt server"
+    - stage: "build and deploy fake rtt server"
       script:
         - gradle :fake-recent-train-times:build
         - gradle :fake-recent-train-times:shadowJar
