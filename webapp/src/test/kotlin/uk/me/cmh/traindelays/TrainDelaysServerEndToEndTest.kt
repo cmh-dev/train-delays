@@ -52,6 +52,14 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         checkMainContentForResultsTable(driver)
     }
 
+    @Test
+    fun `the main page has journey details for a results table`() {
+        val driver = HtmlUnitDriver()
+        driver.navigate().to("http://localhost:8080/")
+        val heading = driver.findElement(By.tagName("h4"))
+        assertThat(heading.text, equalTo("HSL to WAT"))
+    }
+
    private fun checkMainContentForResultsTable(driver: WebDriver) {
 
        val resultsTable = driver.findElement(By.tagName("table"))
