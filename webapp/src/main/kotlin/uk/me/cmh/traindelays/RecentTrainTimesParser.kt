@@ -50,7 +50,7 @@ fun parseTrainData(html: String): TrainServiceInfo {
                         else -> LocalTime.parse(actualEndTimeStr.split(" ")[0])
                     }
                     val trainService = TrainService(
-                        serviceDates[index],
+                        "[$index] ${serviceDates[index]}",
                         scheduledStartTime,
                         scheduledEndTime,
                         actualEndTime
@@ -58,6 +58,10 @@ fun parseTrainData(html: String): TrainServiceInfo {
                     trainServices.add(trainService)
                 }
             }
+    }
+
+    trainServices.sortBy {
+        it.date
     }
 
     return TrainServiceInfo(

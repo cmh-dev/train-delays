@@ -29,7 +29,7 @@ class TrainDataTableParserTest {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedCancelledService = trainServiceInfo.trainServices
             .first { trainService ->
-                trainService.date == "Fri 20"
+                trainService.date.contains("Fri 20")
                     && trainService.scheduledStart == LocalTime.parse("08:01")
             }
         assertThat(expectedCancelledService.isCancelled(), equalTo(true))
@@ -40,7 +40,7 @@ class TrainDataTableParserTest {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedCancelledService = trainServiceInfo.trainServices
             .first { trainService ->
-                trainService.date == "Fri 20"
+                trainService.date.contains("Fri 20")
                         && trainService.scheduledStart == LocalTime.parse("08:01")
             }
         assertThat(expectedCancelledService.delay() == null, equalTo(true))
@@ -50,7 +50,7 @@ class TrainDataTableParserTest {
     fun `parsed data should contain a correct run service`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
-            trainService.date == "Fri 20"
+            trainService.date.contains("Fri 20")
                     && trainService.scheduledStart == LocalTime.parse("07:13")
         }
         assertThat(expectedRunService.actualEnd == null, equalTo(false))
@@ -60,7 +60,7 @@ class TrainDataTableParserTest {
     fun `correct delay should be able to be calculate from parsed data`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
-            trainService.date == "Fri 20"
+            trainService.date.contains("Fri 20")
                     && trainService.scheduledStart == LocalTime.parse("07:13")
         }
         assertThat(expectedRunService.delay(), equalTo(22L))
@@ -70,7 +70,7 @@ class TrainDataTableParserTest {
     fun `delayed train should not be shown as cancelled from parsed data`() {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(html)
         val expectedRunService = trainServiceInfo.trainServices.first { trainService ->
-            trainService.date == "Fri 20"
+            trainService.date.contains("Fri 20")
                     && trainService.scheduledStart == LocalTime.parse("07:13")
         }
         assertThat(expectedRunService.isCancelled(), equalTo(false))

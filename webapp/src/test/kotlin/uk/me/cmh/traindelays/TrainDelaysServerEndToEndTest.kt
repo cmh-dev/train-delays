@@ -61,7 +61,7 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
 
        val dataColumns = rows.first().findElements(By.tagName("td"))
        assertThat(dataColumns, hasSize(equalTo(5)))
-       assertThat(dataColumns[4].text, equalTo("20"))
+       assertThat(dataColumns[4].text, equalTo("16"))
 
     }
 
