@@ -60,6 +60,14 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         assertThat(heading.text, equalTo("HSL to WAT"))
     }
 
+    @Test
+    fun `the main page should return two results tables`() {
+        val driver = HtmlUnitDriver()
+        driver.navigate().to("http://localhost:8080")
+        val tables = driver.findElementsByTagName("table")
+        assertThat(tables, hasSize(equalTo(2)))
+    }
+
    private fun checkMainContentForResultsTable(driver: WebDriver) {
 
        val resultsTable = driver.findElement(By.tagName("table"))

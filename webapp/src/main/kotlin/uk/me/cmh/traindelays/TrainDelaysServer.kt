@@ -36,9 +36,15 @@ fun TrainTimesServerApp() :HttpHandler {
         "/" bind Method.GET to {
             Response(Status.OK)
                 .body(renderer.invoke(
-                    TrainServiceInfoModelView(
-                        listOf(requestTrainDataFromRecentTrainTimes("Haslemere (HSL)",
-                            "London Waterloo (WAT)", "6a")))
+                        TrainServiceInfoModelView(
+                            listOf(
+                                requestTrainDataFromRecentTrainTimes("Haslemere (HSL)",
+                                "London Waterloo (WAT)", "6a"),
+                                requestTrainDataFromRecentTrainTimes("London Waterloo (WAT)",
+                                    "Haslemere (HSL)",
+                                    "4p")
+                            )
+                        )
                     )
                 )
                 .header("Content-Type", ContentType.TEXT_HTML.toHeaderValue())
