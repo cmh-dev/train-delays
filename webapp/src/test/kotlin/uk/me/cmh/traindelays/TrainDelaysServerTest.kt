@@ -5,7 +5,7 @@ import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
 import org.junit.Test
 
-class TrainDelaysServerTest :TrainDelaysServerBaseTest() {
+class TrainDelaysServerTest : TrainDelaysServerBaseTest() {
 
     @Test
     fun `a call to the recent train times site should return the correct filtered data`() {

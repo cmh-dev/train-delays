@@ -30,7 +30,7 @@ class TrainDataTableParserTest {
         val expectedCancelledService = trainServiceInfo.trainServices
             .first { trainService ->
                 trainService.date.contains("Fri 20")
-                    && trainService.scheduledStart == LocalTime.parse("08:01")
+                        && trainService.scheduledStart == LocalTime.parse("08:01")
             }
         assertThat(expectedCancelledService.isCancelled(), equalTo(true))
     }
@@ -89,7 +89,6 @@ class TrainDataTableParserTest {
         val trainServiceInfo: TrainServiceInfo = parseTrainData(htmlWithDotsAndBlanks)
         assertThat(trainServiceInfo.trainServices, hasSize(equalTo(86)))
     }
-
 
 
 }

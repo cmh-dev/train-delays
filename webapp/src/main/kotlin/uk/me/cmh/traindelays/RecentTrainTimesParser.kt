@@ -12,7 +12,7 @@ fun parseTrainData(html: String): TrainServiceInfo {
     val startAndEndStation = trainDataTableBody
         .select("tr")[1]
         .select("th")
-        .filterIndexed{ index, td -> index == 1 || index == 2 }
+        .filterIndexed { index, td -> index == 1 || index == 2 }
         .map { td -> td.text().split(" ").last() }
         .zipWithNext()
         .first()
@@ -20,20 +20,22 @@ fun parseTrainData(html: String): TrainServiceInfo {
     val serviceDates = trainDataTableBody
         .select("tr")[1]
         .select("th")
-        .filterIndexed{ index, td -> index >= 6 }
+        .filterIndexed { index, td -> index >= 6 }
         .map { td -> td.text() ?: "" }
 
     val serviceData = trainDataTableBody
         .select("tr")
-        .filterIndexed {index, tr -> index > 1}
-        .map { tr -> tr.select("td")
-            .filterIndexed { index, td -> index == 1 || index ==2 || index >= 6 }
-            .mapIndexed { index, td -> when (index) {
-                0 -> td.text() ?: ""
-                1 -> td.text() ?: ""
-                else -> td.select("a").text() ?: ""
-            }
-            }
+        .filterIndexed { index, tr -> index > 1 }
+        .map { tr ->
+            tr.select("td")
+                .filterIndexed { index, td -> index == 1 || index == 2 || index >= 6 }
+                .mapIndexed { index, td ->
+                    when (index) {
+                        0 -> td.text() ?: ""
+                        1 -> td.text() ?: ""
+                        else -> td.select("a").text() ?: ""
+                    }
+                }
         }
 
     val trainServices = mutableListOf<TrainService>()

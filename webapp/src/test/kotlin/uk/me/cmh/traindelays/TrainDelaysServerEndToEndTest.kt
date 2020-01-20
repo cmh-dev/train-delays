@@ -16,7 +16,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
 
-    private val trainTimesServer = TrainTimesServer()
+    private val trainTimesServer = trainTimesServer()
 
     @Before
     fun startTrainTimesServer() {
@@ -33,7 +33,7 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
     @Test
     fun `the status of the server is okay`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8080/status"))
+        val response = client(Request(Method.GET, "http://localhost:8080/status"))
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
@@ -68,16 +68,16 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         assertThat(tables, hasSize(equalTo(2)))
     }
 
-   private fun checkMainContentForResultsTable(driver: WebDriver) {
+    private fun checkMainContentForResultsTable(driver: WebDriver) {
 
-       val resultsTable = driver.findElement(By.tagName("table"))
-       val rows = resultsTable.findElements(By.tagName("tr"))
+        val resultsTable = driver.findElement(By.tagName("table"))
+        val rows = resultsTable.findElements(By.tagName("tr"))
 
-       assertThat(rows, hasSize(equalTo(7)))
+        assertThat(rows, hasSize(equalTo(7)))
 
-       val dataColumns = rows.first().findElements(By.tagName("td"))
-       assertThat(dataColumns, hasSize(equalTo(5)))
-       assertThat(dataColumns[4].text, equalTo("16"))
+        val dataColumns = rows.first().findElements(By.tagName("td"))
+        assertThat(dataColumns, hasSize(equalTo(5)))
+        assertThat(dataColumns[4].text, equalTo("16"))
 
     }
 

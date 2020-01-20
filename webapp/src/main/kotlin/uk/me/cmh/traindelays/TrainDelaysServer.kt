@@ -12,13 +12,7 @@ import org.http4k.template.ThymeleafTemplates
 import org.http4k.template.ViewModel
 
 
-data class NoModelView(val template: String) :ViewModel {
-    override fun template(): String {
-        return template
-    }
-}
-
-data class TrainServiceInfoModelView(val trainServiceInfoList: List<TrainServiceInfo>) :ViewModel {
+data class TrainServiceInfoModelView(val trainServiceInfoList: List<TrainServiceInfo>) : ViewModel {
     override fun template(): String {
         return "templates/main"
     }
@@ -28,21 +22,26 @@ val portKey = Key("port", intType)
 val recentTrainTimesSiteUrlKey = Key("recent.train.times.url", stringType)
 val config = EnvironmentVariables() overriding ConfigurationProperties.fromResource("defaults.properties")
 
-fun TrainTimesServerApp() :HttpHandler {
+fun trainTimesServerApp(): HttpHandler {
 
     val renderer = ThymeleafTemplates().CachingClasspath()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/" bind Method.GET to {
             Response(Status.OK)
-                .body(renderer.invoke(
+                .body(
+                    renderer.invoke(
                         TrainServiceInfoModelView(
                             listOf(
-                                requestTrainDataFromRecentTrainTimes("Haslemere (HSL)",
-                                "London Waterloo (WAT)", "6a"),
-                                requestTrainDataFromRecentTrainTimes("London Waterloo (WAT)",
+                                requestTrainDataFromRecentTrainTimes(
                                     "Haslemere (HSL)",
-                                    "4p")
+                                    "London Waterloo (WAT)", "6a"
+                                ),
+                                requestTrainDataFromRecentTrainTimes(
+                                    "London Waterloo (WAT)",
+                                    "Haslemere (HSL)",
+                                    "4p"
+                                )
                             )
                         )
                     )
@@ -75,39 +74,39 @@ Op=Srch
 &MnScCt=2
  */
 
-fun requestTrainDataFromRecentTrainTimes(start :String, end :String, timeOfDay :String) :TrainServiceInfo  {
+fun requestTrainDataFromRecentTrainTimes(start: String, end: String, timeOfDay: String): TrainServiceInfo {
     val client = OkHttp()
     val request = Request(Method.GET, "${config[recentTrainTimesSiteUrlKey]}/Home/Search")
-        .query("Op","Srch")
-        .query("Fr",start)
-        .query("To",end)
-        .query("TimTyp","D")
-        .query("TimDay",timeOfDay)
-        .query("Days","Wk")
-        .query("TimPer","4w")
-        .query("dtFr","")
-        .query("dtTo","")
-        .query("ShwTim","AvAr")
-        .query("MxArCl","5")
+        .query("Op", "Srch")
+        .query("Fr", start)
+        .query("To", end)
+        .query("TimTyp", "D")
+        .query("TimDay", timeOfDay)
+        .query("Days", "Wk")
+        .query("TimPer", "4w")
+        .query("dtFr", "")
+        .query("dtTo", "")
+        .query("ShwTim", "AvAr")
+        .query("MxArCl", "5")
         .query("ArrSta", "5")
-        .query("TOC","All")
-        .query("MetAvg","Mea")
-        .query("MetSpr","RT")
-        .query("MxScDu","")
-        .query("MxSvAg","10")
-        .query("MnScCt","2")
+        .query("TOC", "All")
+        .query("MetAvg", "Mea")
+        .query("MetSpr", "RT")
+        .query("MxScDu", "")
+        .query("MxSvAg", "10")
+        .query("MnScCt", "2")
     val response = client(request)
     return parseTrainData(response.bodyString()).filterByDelayRepayEligable()
 }
 
-fun TrainTimesServer() :Http4kServer {
+fun trainTimesServer(): Http4kServer {
     val serverPort = config[portKey]
     println("Stating server using port $serverPort")
-    return TrainTimesServerApp().asServer(Jetty(serverPort))
+    return trainTimesServerApp().asServer(Jetty(serverPort))
 }
 
 fun main() {
-    TrainTimesServer().start()
+    trainTimesServer().start()
 }
 
 

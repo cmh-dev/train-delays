@@ -10,12 +10,12 @@ import org.junit.Test
 
 class TrainTimesServerSmokeTest {
 
-    private val endPoint  = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
+    private val endPoint = System.getenv("SMOKE_TEST_ENDPOINT") ?: "http://localhost:8080"
 
     @Test
     fun `the status of the server is okay`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "${endPoint}/status"))
+        val response = client(Request(Method.GET, "${endPoint}/status"))
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
@@ -23,7 +23,7 @@ class TrainTimesServerSmokeTest {
     @Test
     fun `the main page should return a 200 status code`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "${endPoint}"))
+        val response = client(Request(Method.GET, endPoint))
         assertThat(response.status, equalTo(Status.OK))
     }
 

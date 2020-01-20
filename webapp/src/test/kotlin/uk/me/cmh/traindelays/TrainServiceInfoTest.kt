@@ -12,17 +12,20 @@ class TrainServiceInfoTest {
     fun `a filtered service info should only contain those services eligable for delay repay`() {
 
         val trainServices = listOf(
-            TrainService("Mon 01",
+            TrainService(
+                "Mon 01",
                 LocalTime.of(7, 30),
                 LocalTime.of(8, 30),
                 LocalTime.of(8, 33)
             ),
-            TrainService("Tue 02",
+            TrainService(
+                "Tue 02",
                 LocalTime.of(7, 30),
                 LocalTime.of(8, 30),
                 LocalTime.of(8, 45)
             ),
-            TrainService("Wed 03",
+            TrainService(
+                "Wed 03",
                 LocalTime.of(7, 30),
                 LocalTime.of(8, 30),
                 null

@@ -21,7 +21,7 @@ data class NoModelView(val template: String) : ViewModel {
 val portKey = Key("port", intType)
 val config = EnvironmentVariables() overriding ConfigurationProperties.fromResource("defaults.properties")
 
-fun FakeRecentTrainTimesServerApp() :HttpHandler {
+fun fakeRecentTrainTimesServerApp(): HttpHandler {
 
     val renderer = ThymeleafTemplates().CachingClasspath()
 
@@ -32,20 +32,20 @@ fun FakeRecentTrainTimesServerApp() :HttpHandler {
             Response(Status.OK)
                 .body(renderer.invoke(NoModelView("templates/recent-train-times")))
                 .header("Content-Type", TEXT_HTML.toHeaderValue())
-         }
+        }
     )
 
 }
 
-fun FakeRecentTrainTimesServer() :Http4kServer {
+fun fakeRecentTrainTimesServer(): Http4kServer {
     val port = config[portKey]
-    return FakeRecentTrainTimesServer(port)
+    return fakeRecentTrainTimesServer(port)
 }
 
-fun FakeRecentTrainTimesServer(port :Int) :Http4kServer {
-    return FakeRecentTrainTimesServerApp().asServer(Jetty(port))
+fun fakeRecentTrainTimesServer(port: Int): Http4kServer {
+    return fakeRecentTrainTimesServerApp().asServer(Jetty(port))
 }
 
 fun main() {
-    FakeRecentTrainTimesServer().start()
+    fakeRecentTrainTimesServer().start()
 }

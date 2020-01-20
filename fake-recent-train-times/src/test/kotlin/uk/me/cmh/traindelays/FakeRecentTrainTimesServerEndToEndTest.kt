@@ -14,7 +14,7 @@ import org.junit.Test
 
 class FakeRecentTrainTimesServerEndToEndTest {
 
-    private val server = FakeRecentTrainTimesServer()
+    private val server = fakeRecentTrainTimesServer()
 
     @Before
     fun setUp() {
@@ -30,7 +30,7 @@ class FakeRecentTrainTimesServerEndToEndTest {
     @Test
     fun `the status of the server is okay`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8081/status"))
+        val response = client(Request(Method.GET, "http://localhost:8081/status"))
         assertThat(response.status, equalTo(Status.OK))
         assertThat(response.bodyString(), equalTo("okay"))
     }
@@ -38,17 +38,21 @@ class FakeRecentTrainTimesServerEndToEndTest {
     @Test
     fun `any request to the search page will return the fake search results`() {
         val client = OkHttp()
-        val response  = client(Request(Method.GET, "http://localhost:8081/Home/Search"))
+        val response = client(Request(Method.GET, "http://localhost:8081/Home/Search"))
         val contentTypeHeaderValue = response.headers
             .first { header -> header.first.toLowerCase() == "content-type" }
             .second ?: ""
         assertThat(contentTypeHeaderValue, startsWith("text/html"))
         assertThat(response.bodyString(), containsSubstring("<title>Search - Recent Train Times</title>"))
-        assertThat(response.bodyString(), containsSubstring("<p>The table below lists all train services departing Haslemere " +
-                "(d HSL) and arriving in London Waterloo (a WAT) for the specified time " +
-                "period.  Also shown is the percentage of the time that each service arrived " +
-                "in London Waterloo no more than 5 minutes late, as well as the average " +
-                "arrival time of each service in London Waterloo.</p>"))
+        assertThat(
+            response.bodyString(), containsSubstring(
+                "<p>The table below lists all train services departing Haslemere " +
+                        "(d HSL) and arriving in London Waterloo (a WAT) for the specified time " +
+                        "period.  Also shown is the percentage of the time that each service arrived " +
+                        "in London Waterloo no more than 5 minutes late, as well as the average " +
+                        "arrival time of each service in London Waterloo.</p>"
+            )
+        )
     }
 
 }
