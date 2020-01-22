@@ -90,5 +90,11 @@ class TrainDataTableParserTest {
         assertThat(trainServiceInfo.trainServices, hasSize(equalTo(86)))
     }
 
+    @Test
+    fun `a response with unknowns in should be correctly parsed with those not present`() {
+        val htmlWithDotsAndBlanks = javaClass.getResource("/test-html/recent-train-times-unknown.html").readText()
+        val trainServiceInfo: TrainServiceInfo = parseTrainData(htmlWithDotsAndBlanks)
+        assertThat(trainServiceInfo.trainServices, hasSize(equalTo(89)))
+    }
 
 }

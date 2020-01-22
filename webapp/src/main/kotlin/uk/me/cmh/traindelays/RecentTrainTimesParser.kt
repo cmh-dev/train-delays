@@ -46,7 +46,7 @@ fun parseTrainData(html: String): TrainServiceInfo {
         it
             .takeLast(it.size - 2)
             .forEachIndexed { index, actualEndTimeStr ->
-                if (actualEndTimeStr != "" && actualEndTimeStr != "...") {
+                if (actualEndTimeStr != "" && actualEndTimeStr != "..." && actualEndTimeStr != "Unknown") {
                     val actualEndTime = when (actualEndTimeStr) {
                         "CANC/NR" -> null
                         else -> LocalTime.parse(actualEndTimeStr.split(" ")[0])
