@@ -14,7 +14,7 @@ import org.http4k.template.ViewModel
 
 data class TrainServiceInfoModelView(val trainServiceInfoList: List<TrainServiceInfo>) : ViewModel {
     override fun template(): String {
-        return "templates/main"
+        return "templates/main.html"
     }
 }
 

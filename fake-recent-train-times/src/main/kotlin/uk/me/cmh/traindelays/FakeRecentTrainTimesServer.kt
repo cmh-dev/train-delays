@@ -24,13 +24,11 @@ val config = EnvironmentVariables() overriding ConfigurationProperties.fromResou
 fun fakeRecentTrainTimesServerApp(): HttpHandler {
 
     val renderer = ThymeleafTemplates().CachingClasspath()
-
-    val view = Body.viewModel(renderer, TEXT_HTML).toLens()
     return routes(
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/Home/Search" bind Method.GET to {
             Response(Status.OK)
-                .body(renderer.invoke(NoModelView("templates/recent-train-times")))
+                .body(renderer.invoke(NoModelView("templates/recent-train-times.html")))
                 .header("Content-Type", TEXT_HTML.toHeaderValue())
         }
     )
