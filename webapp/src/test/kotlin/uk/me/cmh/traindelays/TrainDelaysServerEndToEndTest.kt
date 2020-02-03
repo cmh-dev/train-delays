@@ -42,7 +42,7 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
     fun `the main page should return the correct content`() {
         val driver = HtmlUnitDriver()
         driver.navigate().to("http://localhost:8080/")
-        assertThat(driver.title, equalTo("Train Times"))
+        assertThat(driver.title, equalTo("Train Delays"))
     }
 
     @Test
