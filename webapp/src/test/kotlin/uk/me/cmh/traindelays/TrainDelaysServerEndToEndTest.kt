@@ -1,6 +1,8 @@
 package uk.me.cmh.traindelays
 
 import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.contains
+import com.natpryce.hamkrest.containsSubstring
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
 import org.http4k.client.OkHttp
@@ -66,6 +68,22 @@ class TrainTimesServerEndToEndTest : TrainDelaysServerBaseTest() {
         driver.navigate().to("http://localhost:8080")
         val tables = driver.findElementsByTagName("table")
         assertThat(tables, hasSize(equalTo(2)))
+    }
+
+    @Test
+    fun `css should be able to be loaded from the static path`() {
+    val client = OkHttp()
+        val response = client(Request(Method.GET, "http://localhost:8080/static/css/materialize.min.css"))
+        assertThat(response.status, equalTo(Status.OK))
+        assertThat(response.bodyString(), containsSubstring(".materialize-red{"))
+    }
+
+    @Test
+    fun `js should be able to be loaded from the static path`() {
+    val client = OkHttp()
+        val response = client(Request(Method.GET, "http://localhost:8080/static/js/materialize.min.js"))
+        assertThat(response.status, equalTo(Status.OK))
+        assertThat(response.bodyString(), containsSubstring("var _get=function"))
     }
 
     private fun checkMainContentForResultsTable(driver: WebDriver) {

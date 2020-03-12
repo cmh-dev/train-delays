@@ -3,8 +3,10 @@ package uk.me.cmh.traindelays
 import com.natpryce.konfig.*
 import org.http4k.client.OkHttp
 import org.http4k.core.*
+import org.http4k.routing.ResourceLoader.Companion.Classpath
 import org.http4k.routing.bind
 import org.http4k.routing.routes
+import org.http4k.routing.static
 import org.http4k.server.Http4kServer
 import org.http4k.server.Jetty
 import org.http4k.server.asServer
@@ -26,6 +28,7 @@ fun trainTimesServerApp(): HttpHandler {
 
     val renderer = ThymeleafTemplates().CachingClasspath()
     return routes(
+        "/static" bind static(Classpath("/static")),
         "/status" bind Method.GET to { Response(Status.OK).body("okay") },
         "/" bind Method.GET to {
             Response(Status.OK)
