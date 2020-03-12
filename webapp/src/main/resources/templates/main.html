@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <title>Train Delays</title>
-    <style>
-        body {font-family: Arial, Helvetica, sans-serif}
-    </style>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 </head>
 <body>
-<div th:each="trainServiceInfo : ${model.trainServiceInfoList}">
+<div  class="container" th:each="trainServiceInfo : ${model.trainServiceInfoList}">
     <h4 th:text="${trainServiceInfo.startStation} + ' to ' + ${trainServiceInfo.endStation}"></h4>
-    <table border="1" cellpadding="2">
+    <table class="striped">
+        <tbody>
         <tr th:each="trainService : ${trainServiceInfo.trainServices}">
             <td th:text="${trainService.date}"></td>
             <td th:text="${trainService.scheduledStart}"></td>
@@ -18,7 +17,9 @@
             <td th:text="${trainService.actualEnd}"></td>
             <td th:text="${trainService.isCancelled}? 'CANCELLED' : ${trainService.delay}"></td>
         </tr>
+        </tbody>
     </table>
 </div>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>
