@@ -3,4 +3,5 @@ test {
         events "passed", "skipped", "failed"
         exceptionFormat "full"
     }
+    systemProperty "smoketest.endpoint", System.getProperty("smoketest.endpoint")
 }
